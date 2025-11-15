@@ -27,14 +27,27 @@ export class LoginPage {
   email = '';
   password = '';
 
+  private staticUser = {
+    email: 'user@onpe.pe',
+    password: '123456',
+  };
+
   constructor(private router: Router) {}
 
   login() {
-    if (this.email.trim() && this.password.trim()) {
+    if (!this.email.trim() || !this.password.trim()) {
+      alert('Por favor, ingresa tu correo y contraseña.');
+      return;
+    }
+
+    if (
+      this.email.trim() === this.staticUser.email &&
+      this.password.trim() === this.staticUser.password
+    ) {
       console.log('Login OK', this.email, this.password);
       this.router.navigate(['/tabs']);
     } else {
-      alert('Por favor, ingresa tu correo y contraseña.');
+      alert('Correo o contraseña incorrectos.');
     }
   }
 
