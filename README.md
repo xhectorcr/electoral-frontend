@@ -4,22 +4,12 @@
 
 Asegúrate de tener instalado:
 
-- **Node.js 18+**
-- **npm 9+**
-- **Ionic CLI**
+- Node.js 18+
+- npm 9+
+- Ionic CLI
   
 
-##Tecnologías principales
-
-Angular 20 — Framework moderno con componentes standalone
-
-Ionic 8 — Toolkit para web y móviles
-
-TailwindCSS 3 — Framework de utilidades CSS
-
-TypeScript 5.9
-
-##Instalación del proyecto
+## Dependencias Necesarias
 
 ```bash
   npm install
