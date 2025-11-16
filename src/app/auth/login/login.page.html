@@ -1,7 +1,16 @@
 <ion-content class="login-content" fullscreen>
   <div class="login-wrapper">
     <div class="login-container">
-      <img src="assets/logo.png" alt="ONPE Logo" class="login-logo" />
+      <!-- Botón de retroceder -->
+      <ion-button
+        fill="clear"
+        class="back-button"
+        (click)="goBack()"
+      >
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+
+      <img src="/assets/icon/ONPE_icons.png" alt="ONPE Logo" class="login-logo" />
 
       <h1 class="login-title">Bienvenido</h1>
       <p class="login-subtitle">Ingresa tus datos para continuar</p>
