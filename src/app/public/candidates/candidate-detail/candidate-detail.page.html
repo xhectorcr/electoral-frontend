@@ -10,16 +10,16 @@
 <ion-content *ngIf="candidate" class="page-bg">
   <div class="profile-header">
     <div class="photo-wrapper">
-      <img [src]="candidate.photo" class="profile-photo" />
+      <img [src]="candidate.imageUrl" class="profile-photo" />
     </div>
 
-    <h2 class="name">{{ candidate.name }}</h2>
-    <p class="position">{{ candidate.position }}</p>
+    <h2 class="name">{{ candidate.fullName }}</h2>
+    <p class="position">{{ candidate.office }}</p>
 
-    <ion-badge class="party-badge">{{ candidate.party }}</ion-badge>
-  </div>
+    <ion-badge class="party-badge">{{ candidate.partyName }}</ion-badge>
+  </div> 
 
-  <ion-card class="info-card">
+  <!-- <ion-card class="info-card">
     <ion-card-header>
       <ion-card-title>Información General</ion-card-title>
     </ion-card-header>
@@ -37,7 +37,6 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- Formación -->
   <ion-card class="section-card">
     <ion-card-header>
       <ion-card-title>Formación Académica</ion-card-title>
@@ -47,7 +46,6 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- Cargos -->
   <ion-card class="section-card">
     <ion-card-header>
       <ion-card-title>Cargos Anteriores</ion-card-title>
@@ -55,5 +53,5 @@
     <ion-card-content>
       <p>{{ candidate.previousPositions || 'Información no disponible' }}</p>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 </ion-content>

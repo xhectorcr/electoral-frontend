@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://mi-backend.com/api', // cambiar al dominio real en producción
+  apiUrl: 'http://192.168.100.42:8080/api/v1',
 };

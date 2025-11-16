@@ -29,12 +29,18 @@
             class="login-icon"
           ></ion-icon>
           <ion-input
-            type="password"
+            [type]="showPassword ? 'text' : 'password'"
             [(ngModel)]="password"
             name="password"
             placeholder="Contraseña"
             required
           ></ion-input>
+          <ion-icon
+            slot="end"
+            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+            (click)="togglePassword()"
+            class="toggle-password-icon"
+          ></ion-icon>
         </ion-item>
 
         <ion-button expand="block" type="submit" class="login-button">

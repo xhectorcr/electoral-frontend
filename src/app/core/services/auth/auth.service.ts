@@ -2,13 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { LoginRequest, RefreshRequest, RegisterRequest, SessionLogoutRequest } from '../model/auth/auth.model';
-import { ApiResponse, AuthResponse } from '../model/base/base.model';
-
-export interface LoginResponse {
-  token: string;
-  user: any;
-}
+import {
+  LoginRequest,
+  RefreshRequest,
+  RegisterRequest,
+  SessionLogoutRequest,
+} from '../../model/auth/auth.model';
+import { ApiResponse, AuthResponse } from '../../model/base/base.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,14 +20,14 @@ export class AuthService {
 
   login(request: LoginRequest): Observable<ApiResponse<AuthResponse>> {
     return this.http.post<ApiResponse<AuthResponse>>(
-      `${this.baseUrl}/login`,
+      `${this.baseUrl}/auth/login`,
       request
     );
   }
 
   register(request: RegisterRequest): Observable<ApiResponse<any>> {
     return this.http.post<ApiResponse<any>>(
-      `${this.baseUrl}/register`,
+      `${this.baseUrl}/auth/register`,
       request
     );
   }
@@ -45,12 +45,12 @@ export class AuthService {
   }
 
   verifyEmail(code: string): Observable<string> {
-    return this.http.get<string>(`${this.baseUrl}/verify?code=${code}`);
+    return this.http.get<string>(`${this.baseUrl}/auth/verify?code=${code}`);
   }
 
   refresh(request: RefreshRequest): Observable<ApiResponse<AuthResponse>> {
     return this.http.post<ApiResponse<AuthResponse>>(
-      `${this.baseUrl}/refresh`,
+      `${this.baseUrl}/auth/refresh`,
       request
     );
   }
@@ -60,15 +60,19 @@ export class AuthService {
     accessToken: string
   ): Observable<ApiResponse<any>> {
     const headers = new HttpHeaders({ Authorization: `Bearer ${accessToken}` });
-    return this.http.post<ApiResponse<any>>(`${this.baseUrl}/logout`, request, {
-      headers,
-    });
+    return this.http.post<ApiResponse<any>>(
+      `${this.baseUrl}/auth/logout`,
+      request,
+      {
+        headers,
+      }
+    );
   }
 
   logoutAll(accessToken: string): Observable<ApiResponse<any>> {
     const headers = new HttpHeaders({ Authorization: `Bearer ${accessToken}` });
     return this.http.post<ApiResponse<any>>(
-      `${this.baseUrl}/logout-all`,
+      `${this.baseUrl}/auth/logout-all`,
       {},
       { headers }
     );

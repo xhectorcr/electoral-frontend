@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   IonBackButton,
   IonBadge,
@@ -18,7 +18,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { Candidate } from '../candidates.page';
+import { CandidateResponse } from 'src/app/core/model/candidates/candidates.model';
 
 @Component({
   selector: 'app-candidate-detail',
@@ -46,19 +46,24 @@ import { Candidate } from '../candidates.page';
   ],
 })
 export class CandidateDetailPage implements OnInit {
-  candidate!: Candidate;
+  candidate!: CandidateResponse;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const name = this.route.snapshot.paramMap.get('name');
-
     const stored = sessionStorage.getItem('selectedCandidate');
     if (stored) {
-      const c = JSON.parse(stored);
-      if (c.name === name) {
-        this.candidate = c;
-      }
+      this.candidate = JSON.parse(stored);
+    } else {
+      this.router.navigate(['/candidates']);
     }
+  }
+
+  onImageError(event: Event) {
+    if (!this.candidate) return;
+    const placeholder = `https://placehold.co/300x300/64748b/ffffff?text=${this.candidate.fullName
+      .charAt(0)
+      .toUpperCase()}`;
+    (event.target as HTMLImageElement).src = placeholder;
   }
 }
