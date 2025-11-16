@@ -1,17 +1,28 @@
+ion-content {
+  --background: #ffffff;
+  background: #ffffff;
+}
+html,
+body,
+ion-app,
+.ion-page,
+ion-content {
+  --background: #ffffff;
+  background: #ffffff;
+}
+
 .custom-tab-bar {
   --background: #ffffff;
+  background-color: #ffffff;  // añade esta línea
   --color: #9a9a9a;
   --color-selected: var(--onpe-primary);
   --border: 0;
-
   height: 70px;
   padding: 6px 10px env(safe-area-inset-bottom);
   border-top: 1px solid #e6e6e6;
-
   display: flex;
   justify-content: space-around;
   align-items: center;
-
   column-gap: 4px;
 }
 

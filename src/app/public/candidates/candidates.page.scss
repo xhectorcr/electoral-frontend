@@ -1,5 +1,6 @@
 ion-content {
-  --background: #f4f5f7;
+  --background: linear-gradient(135deg, #f4f5f7 0%, #eef2f7 50%, #f8fafc 100%);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .loading-container {
@@ -9,8 +10,17 @@ ion-content {
   justify-content: center;
   padding: 40px;
   gap: 12px;
-  color: #555;
+  color: #4b5563;
   font-weight: 500;
+
+  ion-spinner {
+    transform: scale(1.1);
+  }
+
+  p {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
 }
 
 .empty-state {
@@ -20,16 +30,17 @@ ion-content {
   justify-content: center;
   padding: 40px 20px;
   text-align: center;
-  color: #666;
+  color: #6b7280;
 
   ion-icon {
     font-size: 3rem;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   p {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
+    max-width: 260px;
   }
 }
 
@@ -37,134 +48,192 @@ ion-content {
   text-align: center;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #333;
-  margin: 20px 0 10px;
-  font-family: "Inter", sans-serif;
+  color: #111827;
+  margin: 18px 0 10px;
+  letter-spacing: 0.02em;
 }
+
 .search-item {
   --background: #ffffff;
-  --border-radius: 12px;
-  margin: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --border-radius: 14px;
+  --inner-padding-start: 10px;
+  --inner-padding-end: 10px;
+  margin: 12px 16px 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  transform: translateY(0);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+
+  ion-icon {
+    color: #6b7280;
+    font-size: 1.2rem;
+  }
+
+  ion-input {
+    font-size: 0.95rem;
+  }
+
+  &:focus-within {
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.09);
+    transform: translateY(-1px);
+  }
 }
+
 .tags-segment {
-  margin: 0 16px 16px 16px;
-  --background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin: 0 16px 14px;
+  --background: #f9fafb;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+  padding: 4px 4px;
+
+  ion-segment-button {
+    --border-radius: 999px;
+    --indicator-color: transparent;
+    --background: transparent;
+    --color: #6b7280;
+    --color-checked: #ffffff;
+    --background-checked: #0f62fe;
+    text-transform: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    min-height: 32px;
+    padding-inline: 10px;
+  }
 }
+
 .results-summary {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0 18px 16px;
-  font-family: "Inter", sans-serif;
+  font-size: 0.86rem;
+  color: #6b7280;
+  margin: 0 18px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  strong {
+    color: #111827;
+  }
 }
 
 .candidates-grid {
   display: grid;
-  gap: 16px;
-  padding: 0 16px 16px;
+  gap: 18px;
+  padding: 4px 16px 18px;
   grid-template-columns: 1fr;
 }
+
 @media (min-width: 600px) {
   .candidates-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (min-width: 960px) {
   .candidates-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 .candidate-card {
   --background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+  border-radius: 20px;
   overflow: hidden;
   margin: 0;
   display: flex;
-  flex-direction: column; 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.candidate-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  transform: translateY(0);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  backdrop-filter: blur(6px);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.18);
+    border-color: rgba(37, 99, 235, 0.7);
+  }
 }
 
 .candidate-photo {
   width: 100%;
-  height: 180px;
+  height: 190px;
   object-fit: cover;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .candidate-card ion-card-header {
   position: relative;
-  padding: 24px 16px 16px 16px;
+  padding: 22px 16px 12px;
   text-align: center;
 }
 
 .party-badge {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  padding: 4px 10px;
-  border-radius: 12px;
-  color: #fff;
-  font-size: 0.8rem;
+  top: 14px;
+  right: 14px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.78rem;
   font-weight: 600;
-  background: var(--ion-color-primary); 
+  background: linear-gradient(135deg, #0f62fe, #2563eb);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
 }
 
 .candidate-card ion-card-title {
-  font-size: 1.25rem;
+  font-size: 1.18rem;
   font-weight: 700;
-  color: #333;
-  margin-bottom: 4px;
+  color: #111827;
+  margin-bottom: 2px;
+  margin-top: 18px;
+  line-height: 1.25;
 }
 
 .candidate-card ion-card-subtitle {
-  font-size: 1rem;
-  color: #555;
+  font-size: 0.92rem;
+  color: #4b5563;
+  letter-spacing: 0.01em;
 }
 
 .card-content-wrapper {
-  padding: 0 16px 16px 16px;
+  padding: 0 16px 16px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  height: 100%;
 }
 
 .info-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 16px 0;
+  margin: 10px 0 14px;
   text-align: left;
-  border-top: 1px solid #f0f0f0;
-  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 14px;
 }
 
 .info-list li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   margin-bottom: 8px;
 
   ion-icon {
     font-size: 1.1rem;
     flex-shrink: 0;
+    color: #2563eb;
+    margin-top: 1px;
   }
 
   ion-note {
-    font-size: 0.85rem;
-    color: #444;
-    line-height: 1.4;
+    font-size: 0.86rem;
+    color: #374151;
+    line-height: 1.35;
   }
 }
 
 .details-button {
-  --border-radius: 10px;
+  --border-radius: 999px;
   margin-top: auto;
+  margin-bottom: 4px;
+  --box-shadow: 0 8px 18px rgba(37, 99, 235, 0.5);
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
