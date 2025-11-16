@@ -13,6 +13,8 @@ $RECYCLE.BIN/
 log.txt
 
 
+.vscode/
+
 /.sourcemaps
 /.versions
 /coverage
