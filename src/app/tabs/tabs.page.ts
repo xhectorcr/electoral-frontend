@@ -1,11 +1,30 @@
+import { CommonModule } from '@angular/common'; // <-- AÑADIDO
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonAvatar,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonMenu,
+  IonNote,
+  IonTitle,
+  IonToolbar,
+  IonTabs,
+  IonTabBar,
+  IonTabButton
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   calendarOutline,
+  documentTextOutline,
   homeOutline,
   informationCircleOutline,
+  logInOutline,
   newspaperOutline,
   peopleOutline,
   ribbonOutline,
@@ -19,6 +38,8 @@ addIcons({
   'information-circle-outline': informationCircleOutline,
   'newspaper-outline': newspaperOutline,
   'home-outline': homeOutline,
+  'log-in-outline': logInOutline,
+  'document-text-outline': documentTextOutline,
 });
 
 @Component({
@@ -26,6 +47,25 @@ addIcons({
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
   standalone: true,
-  imports: [IonicModule, RouterModule, ChatbotPage],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ChatbotPage,
+    IonTabs,
+    IonTabBar,
+    IonTabButton,
+    IonIcon,
+    IonLabel,
+    IonMenu,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    IonItem,
+    IonAvatar,
+    IonListHeader,
+    IonNote,
+  ],
 })
 export class TabsPage {}

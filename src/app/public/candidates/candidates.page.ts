@@ -43,6 +43,7 @@ import {
 import { finalize } from 'rxjs';
 import { CandidateResponseDTO } from 'src/app/core/model/candidates/candidates.model';
 import { CandidateService } from 'src/app/core/services/candidates/candidates.service';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 
 addIcons({
   searchOutline,
@@ -88,6 +89,7 @@ addIcons({
     IonButton,
     IonSpinner,
     IonNote,
+    HeaderComponent,
   ],
 })
 export class CandidatesPage implements OnInit {

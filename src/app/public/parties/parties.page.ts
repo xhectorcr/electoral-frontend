@@ -24,6 +24,7 @@ import {
 import { finalize } from 'rxjs';
 import { PartyResponse } from 'src/app/core/model/parties/parties.model';
 import { PartiesService } from 'src/app/core/services/parties/parties.service';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 
 addIcons({
   linkOutline,
@@ -50,6 +51,7 @@ addIcons({
     FormsModule,
     IonIcon,
     IonSpinner,
+    HeaderComponent
   ],
 })
 export class PartiesPage implements OnInit {

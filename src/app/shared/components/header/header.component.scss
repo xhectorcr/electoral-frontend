@@ -31,14 +31,11 @@ ion-header {
   }
 }
 
-// Variantes de color (opcional)
 .header-toolbar {
-  // Azul principal (default)
   &.primary {
     --background: #2196F3;
   }
 
-  // Rojo (para secciones importantes)
   &.danger {
     --background: #f44336;
   }
@@ -48,13 +45,11 @@ ion-header {
     --background: #1976D2;
   }
 
-  // Claro
   &.light {
     --background: #42A5F5;
   }
 }
 
-// Responsive
 @media (min-width: 768px) {
   .header-toolbar {
     --min-height: 64px;
@@ -66,7 +61,6 @@ ion-header {
   }
 }
 
-// Modo oscuro (si lo necesitas)
 @media (prefers-color-scheme: dark) {
   .header-toolbar {
     --background: #1976D2;

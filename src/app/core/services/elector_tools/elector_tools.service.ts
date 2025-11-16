@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import {
   ElectorRequest,
   ElectorResponse,
+  TableStatsResponse,
 } from '../../model/elector_tools/elector_tools.model';
 
 @Injectable({
@@ -49,6 +50,23 @@ export class ElectorService {
   getAllTestElectors(): Observable<ElectorResponse[]> {
     return this.http.get<ElectorResponse[]>(
       `${this.baseUrl}/public/test-electors`
+    );
+  }
+
+  getMyTableStats(): Observable<TableStatsResponse> {
+    return this.http.get<TableStatsResponse>(
+      `${this.baseUrl}/member/table-stats`
+    );
+  }
+
+  getVotersForMyTable(): Observable<ElectorResponse[]> {
+    return this.http.get<ElectorResponse[]>(`${this.baseUrl}/member/voters`);
+  }
+
+  markElectorAsVoted(dni: string): Observable<ElectorResponse> {
+    return this.http.post<ElectorResponse>(
+      `${this.baseUrl}/member/mark-voted/${dni}`,
+      {}
     );
   }
 }

@@ -67,12 +67,16 @@ addIcons({
   ],
 })
 export class ManualPage implements OnInit {
+  manualUrl =
+    'https://www.onpe.gob.pe/elecciones/2022/elecciones-internas/docs/miembro-mesa/manual-instrucciones.pdf';
   constructor() {}
+
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
 
   downloadManual() {
-    console.log('Iniciando descarga del PDF...');
+    console.log('Abriendo PDF...');
+    window.open(this.manualUrl, '_blank');
   }
 }

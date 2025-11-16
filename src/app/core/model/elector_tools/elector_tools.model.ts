@@ -27,5 +27,12 @@ export interface ElectorResponse {
   latitude?: number;
   longitude?: number;
   tableLocationDetail?: string;
+  hasVoted?: boolean;
 }
 
+export interface TableStatsResponse {
+  tableNumber: string;
+  totalVoters: number;
+  votersWhoVoted: number;
+  pendingVoters: number;
+}

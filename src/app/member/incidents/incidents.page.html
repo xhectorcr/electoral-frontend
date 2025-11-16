@@ -8,6 +8,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="page-background">
+  <ion-refresher slot="fixed" (ionRefresh)="loadIncidents($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-segment
     [(ngModel)]="selectedSegment"
     (ionChange)="filterIncidents()"
@@ -17,15 +21,25 @@
     <ion-segment-button value="all">
       <ion-label>Todos</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="pending">
+    <ion-segment-button [value]="IncidentStatus.PENDIENTE">
       <ion-label>Pendientes</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="resolved">
+    <ion-segment-button [value]="IncidentStatus.RESUELTO">
       <ion-label>Resueltos</ion-label>
     </ion-segment-button>
   </ion-segment>
 
-  <ion-list class="incident-list">
+  <div *ngIf="isLoading" class="status-container">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Cargando incidentes...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="status-container error">
+    <ion-icon name="alert-circle-outline" color="danger"></ion-icon>
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <ion-list class="incident-list" *ngIf="!isLoading && !errorMessage">
     <ion-list-header>
       Mostrando {{ filteredIncidents.length }} incidentes
     </ion-list-header>
@@ -35,11 +49,7 @@
       lines="none"
       class="no-results-item"
     >
-      <ion-icon
-        name="checkmark-circle-outline"
-        slot="start"
-        color="success"
-      ></ion-icon>
+      <ion-icon name="sad-outline" slot="start" color="medium"></ion-icon>
       <ion-label>No hay incidentes para mostrar.</ion-label>
     </ion-item>
 
@@ -54,20 +64,23 @@
         [name]="getIconForType(incident.type)"
         slot="start"
         class="incident-icon"
-        [color]="incident.status === 'resolved' ? 'medium' : 'danger'"
+        [color]="incident.status === IncidentStatus.RESUELTO ? 'medium' : 'danger'"
       ></ion-icon>
       <ion-label>
         <h2>{{ incident.title }}</h2>
-        <p>{{ incident.time }} - {{ incident.type }}</p>
+        <p>
+          {{ incident.createdAt | date: 'd MMM, h:mm a' }} - {{ incident.type }}
+        </p>
       </ion-label>
       <ion-chip
-        [color]="incident.status === 'resolved' ? 'success' : 'danger'"
+        [color]="incident.status === IncidentStatus.RESUELTO ? 'success' : 'danger'"
         slot="end"
         outline="true"
         class="status-chip"
       >
         <ion-label>
-          {{ incident.status === 'resolved' ? 'Resuelto' : 'Pendiente' }}
+          {{ incident.status === IncidentStatus.RESUELTO ? 'Resuelto' :
+          'Pendiente' }}
         </ion-label>
       </ion-chip>
     </ion-item>
@@ -77,7 +90,7 @@
     slot="fixed"
     vertical="bottom"
     horizontal="end"
-    (click)="addNewIncident()"
+    (click)="presentIncidentModal()"
   >
     <ion-fab-button color="danger">
       <ion-icon name="add"></ion-icon>

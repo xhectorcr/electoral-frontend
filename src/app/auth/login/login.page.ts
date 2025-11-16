@@ -113,6 +113,6 @@ export class LoginPage {
   }
 
   goBack() {
-    this.navCtrl.back();
+    this.router.navigate(['/tabs/tab0']);
   }
 }

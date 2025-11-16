@@ -23,6 +23,7 @@ import {
 import { finalize } from 'rxjs';
 import { NewsResponse } from 'src/app/core/model/news/news.model';
 import { NewsService } from 'src/app/core/services/news/news.service';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 
 @Component({
   selector: 'app-news',
@@ -50,6 +51,7 @@ import { NewsService } from 'src/app/core/services/news/news.service';
     IonRefresherContent,
     IonNote,
     DatePipe,
+    HeaderComponent
   ],
 })
 export class NewsPage implements OnInit {

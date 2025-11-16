@@ -2,11 +2,41 @@
   --background: #f4f5f7;
 }
 
+.status-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+  background: var(--background);
+
+  ion-spinner {
+    width: 32px;
+    height: 32px;
+  }
+
+  ion-icon {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 12px;
+  }
+
+  &.error {
+    color: var(--ion-color-danger, #eb445a);
+  }
+}
+
 .sticky-segment {
   position: sticky;
   top: 0;
   z-index: 10;
-  --background: #ffffff; 
+  --background: #ffffff;
 }
 
 .incident-list {

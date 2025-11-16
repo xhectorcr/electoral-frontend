@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+  AlertController,
   IonButtons,
   IonChip,
   IonContent,
@@ -15,9 +16,12 @@ import {
   IonList,
   IonListHeader,
   IonMenuButton,
+  IonRefresher,
+  IonRefresherContent,
   IonSearchbar,
   IonSegment,
   IonSegmentButton,
+  IonSpinner,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
@@ -26,22 +30,20 @@ import {
   alertCircle,
   checkmarkCircle,
   personCircleOutline,
+  sadOutline,
   timeOutline,
 } from 'ionicons/icons';
+import { finalize } from 'rxjs';
+import { ElectorResponse } from 'src/app/core/model/elector_tools/elector_tools.model';
+import { ElectorService } from 'src/app/core/services/elector_tools/elector_tools.service';
 
 addIcons({
   personCircleOutline,
   checkmarkCircle,
   timeOutline,
   alertCircle,
+  sadOutline,
 });
-
-interface Voter {
-  id: string;
-  name: string;
-  dni: string;
-  status: 'pending' | 'voted';
-}
 
 @Component({
   selector: 'app-voters',
@@ -69,87 +71,107 @@ interface Voter {
     IonItemOptions,
     IonItemOption,
     IonListHeader,
+    IonSpinner,
+    IonRefresher,
+    IonRefresherContent,
   ],
 })
 export class VotersPage implements OnInit {
-  allVoters: Voter[] = [];
-  filteredVoters: Voter[] = [];
+  allVoters: ElectorResponse[] = [];
+  filteredVoters: ElectorResponse[] = [];
 
   searchTerm: string = '';
   selectedSegment: 'all' | 'pending' | 'voted' = 'all';
 
-  constructor() {}
+  isLoading: boolean = false;
+  errorMessage: string | null = null;
+
+  constructor(
+    private electorService: ElectorService,
+    private alertCtrl: AlertController
+  ) {}
 
   ngOnInit() {
-    this.allVoters = [
-      {
-        id: '1',
-        name: 'Alva Mendoza, Juan Carlos',
-        dni: '45678901',
-        status: 'pending',
-      },
-      {
-        id: '2',
-        name: 'Barrios Gomez, Maria Luisa',
-        dni: '41234567',
-        status: 'voted',
-      },
-      {
-        id: '3',
-        name: 'Castillo Rojas, Pedro',
-        dni: '42345678',
-        status: 'pending',
-      },
-      {
-        id: '4',
-        name: 'Diaz Flores, Ana Maria',
-        dni: '43456789',
-        status: 'pending',
-      },
-      {
-        id: '5',
-        name: 'Espinoza Zúñiga, Luis',
-        dni: '44567890',
-        status: 'voted',
-      },
-      {
-        id: '6',
-        name: 'Fernandez Diaz, Rosa',
-        dni: '45678902',
-        status: 'pending',
-      },
-    ];
-    this.filterVoters();
+    this.loadVoters();
+  }
+
+  loadVoters(event: any = null) {
+    if (!event) {
+      this.isLoading = true;
+    }
+    this.errorMessage = null;
+
+    this.electorService
+      .getVotersForMyTable()
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          if (event) {
+            event.target.complete();
+          }
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          this.allVoters = data;
+          this.filterVoters();
+        },
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'No se pudo cargar el padrón de la mesa.';
+        },
+      });
   }
 
   filterVoters() {
     const term = this.searchTerm.toLowerCase();
 
     this.filteredVoters = this.allVoters.filter((voter) => {
-      const segmentMatch =
-        this.selectedSegment === 'all' || voter.status === this.selectedSegment;
+      let segmentMatch = true;
+      if (this.selectedSegment === 'pending') {
+        segmentMatch = !voter.hasVoted;
+      } else if (this.selectedSegment === 'voted') {
+        segmentMatch = voter.hasVoted === true;
+      }
 
       const searchMatch =
-        voter.name.toLowerCase().includes(term) ||
-        voter.dni.toLowerCase().includes(term);
+        voter.fullName.toLowerCase().includes(term) ||
+        voter.documentNumber.toLowerCase().includes(term);
 
       return segmentMatch && searchMatch;
     });
   }
-
-  trackVoter(index: number, voter: Voter) {
-    return voter.id;
+  trackVoter(index: number, voter: ElectorResponse) {
+    return voter.documentNumber;
   }
 
-  markAsVoted(voter: Voter, slidingItem: IonItemSliding) {
-    voter.status = 'voted';
-    console.log('Marcado como votado:', voter.name);
-    this.filterVoters();
-    slidingItem.close();
+  markAsVoted(voter: ElectorResponse, slidingItem: IonItemSliding) {
+    this.electorService.markElectorAsVoted(voter.documentNumber).subscribe({
+      next: (updatedVoter) => {
+        const index = this.allVoters.findIndex(
+          (v) => v.documentNumber === updatedVoter.documentNumber
+        );
+        if (index > -1) {
+          this.allVoters[index] = updatedVoter;
+        }
+        this.filterVoters();
+        slidingItem.close();
+      },
+      error: async (err) => {
+        console.error(err);
+        slidingItem.close();
+        const alert = await this.alertCtrl.create({
+          header: 'Error',
+          message: 'No se pudo marcar el voto. Intente de nuevo.',
+          buttons: ['OK'],
+        });
+        await alert.present();
+      },
+    });
   }
 
-  reportIncident(voter: Voter, slidingItem: IonItemSliding) {
-    console.log('Reportar incidencia para:', voter.name);
+  reportIncident(voter: ElectorResponse, slidingItem: IonItemSliding) {
+    console.log('Reportar incidencia para:', voter.fullName);
     slidingItem.close();
   }
 }
