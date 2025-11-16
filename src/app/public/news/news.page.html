@@ -1,11 +1,11 @@
 <app-header></app-header>
 
-<ion-content [fullscreen]="true" class="page-bg">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="news-container">
+  <div class="news-container" style="margin-bottom: 20px;">
     <h2 class="section-title">Últimas Noticias</h2>
 
     <div *ngIf="isLoading" class="status-container">

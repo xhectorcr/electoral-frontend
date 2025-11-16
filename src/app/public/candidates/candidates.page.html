@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <div class="section-title">Candidatos 2026</div>
 
   <ion-item class="search-item" lines="none">
@@ -43,7 +43,7 @@
     <p>No se encontraron candidatos que coincidan con tu búsqueda.</p>
   </div>
 
-  <div class="candidates-grid" *ngIf="!isLoading">
+  <div class="candidates-grid" *ngIf="!isLoading" style="margin-bottom: 20px;">
     <ion-card
       *ngFor="let candidate of filteredCandidates"
       class="candidate-card"
