@@ -1,79 +1,109 @@
 <ion-content class="login-content" fullscreen>
-  <div class="login-wrapper">
-    <div class="login-container">
-      <!-- Botón de retroceder -->
-      <ion-button
-        fill="clear"
-        class="back-button"
-        (click)="goBack()"
-      >
-        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-      </ion-button>
+      <div class="login-wrapper">
+        <div class="login-container">
+          <ion-button
+            fill="clear"
+            class="back-button"
+            (click)="goBack()"
+          >
+            <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+          </ion-button>
 
-      <img src="/assets/icon/ONPE_icons.png" alt="ONPE Logo" class="login-logo" />
+          <img
+            src="/assets/icon/ONPE_icons.png"
+            alt="ONPE Logo"
+            class="login-logo"
+          />
 
-      <h1 class="login-title">Bienvenido</h1>
-      <p class="login-subtitle">Ingresa tus datos para continuar</p>
+          <h1 class="login-title">Bienvenido</h1>
+          <p class="login-subtitle">Ingresa tus datos para continuar</p>
 
-      <form (ngSubmit)="login()">
-        <ion-item class="login-item" lines="none">
-          <ion-icon
-            slot="start"
-            name="mail-outline"
-            class="login-icon"
-          ></ion-icon>
-          <ion-input
-            type="email"
-            [(ngModel)]="email"
-            name="email"
-            placeholder="Correo electrónico"
-            required
-          ></ion-input>
-        </ion-item>
+          <ion-segment
+            [(ngModel)]="loginMode"
+            class="login-segment"
+            color="primary"
+          >
+            <ion-segment-button value="public">
+              <ion-label>Público</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="member">
+              <ion-label>Miembro de Mesa</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+          <form (ngSubmit)="login()" #form="ngForm">
+            
+            <ion-item class="login-item" lines="none">
+              <ion-icon
+                slot="start"
+                [name]="loginMode === 'member' ? 'id-card-outline' : 'mail-outline'"
+                class="login-icon"
+              ></ion-icon>
+              <ion-input
+                [type]="loginMode === 'member' ? 'tel' : 'email'"
+                [(ngModel)]="loginIdentifier"
+                name="loginIdentifier"
+                [placeholder]="loginMode === 'member' ? 'Ingresa tu DNI' : 'Correo electrónico'"
+                required
+                [maxlength]="loginMode === 'member' ? 8 : 100"
+              ></ion-input>
+            </ion-item>
 
-        <ion-item class="login-item" lines="none">
-          <ion-icon
-            slot="start"
-            name="lock-closed-outline"
-            class="login-icon"
-          ></ion-icon>
-          <ion-input
-            [type]="showPassword ? 'text' : 'password'"
-            [(ngModel)]="password"
-            name="password"
-            placeholder="Contraseña"
-            required
-          ></ion-input>
-          <ion-icon
-            slot="end"
-            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
-            (click)="togglePassword()"
-            class="toggle-password-icon"
-          ></ion-icon>
-        </ion-item>
+            <ion-item
+              *ngIf="loginMode === 'public'"
+              class="login-item"
+              lines="none"
+            >
+              <ion-icon
+                slot="start"
+                name="lock-closed-outline"
+                class="login-icon"
+              ></ion-icon>
+              <ion-input
+                [type]="showPassword ? 'text' : 'password'"
+                [(ngModel)]="password"
+                name="password"
+                placeholder="Contraseña"
+                required
+              ></ion-input>
+              <ion-icon
+                slot="end"
+                [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+                (click)="togglePassword()"
+                class="toggle-password-icon"
+              ></ion-icon>
+            </ion-item>
 
-        <ion-button expand="block" type="submit" class="login-button">
-          Ingresar
-        </ion-button>
-      </form>
+            <ion-button
+              expand="block"
+              type="submit"
+              class="login-button"
+              [disabled]="loading || !form.valid"
+            >
+              <span *ngIf="!loading">Ingresar</span>
+              <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+            </ion-button>
+          </form>
 
-      <ion-button
-        expand="block"
-        fill="clear"
-        class="register-button"
-        (click)="goToRegister()"
-      >
-        Crear cuenta
-      </ion-button>
+          <div *ngIf="loginMode === 'public'">
+            <ion-button
+              expand="block"
+              fill="clear"
+              class="register-button"
+              (click)="goToRegister()"
+            >
+              Crear cuenta
+            </ion-button>
 
-      <ion-button
-        expand="block"
-        fill="clear"
-        class="forgot-button"
-        (click)="forgotPassword()"
-      >
-        ¿Olvidaste tu contraseña?
-      </ion-button>
-    </div>
-  </div>
-</ion-content>
+            <ion-button
+              expand="block"
+              fill="clear"
+              class="forgot-button"
+              (click)="forgotPassword()"
+            >
+              ¿Olvidaste tu contraseña?
+            </ion-button>
+          </div>
+          
+        </div>
+      </div>
+    </ion-content>

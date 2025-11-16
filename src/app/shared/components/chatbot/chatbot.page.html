@@ -1,0 +1,78 @@
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button (click)="openChat()">
+    <ion-icon name="chatbubbles-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-modal [isOpen]="isOpen" (didDismiss)="closeChat()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Asistente Virtual</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeChat()">
+            <ion-icon name="close-circle-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="chat-content" [fullscreen]="true">
+      <ion-list class="message-list" lines="none">
+        <ion-item *ngFor="let msg of messages" class="message-item">
+          <div
+            class="message-bubble"
+            [class.user-bubble]="msg.sender === 'user'"
+            [class.bot-bubble]="msg.sender === 'bot'"
+          >
+            <ion-avatar
+              *ngIf="msg.sender === 'bot'"
+              slot="start"
+              class="bot-avatar"
+            >
+              <img src="assets/icon/bot_avatar.png" />
+            </ion-avatar>
+
+            <ion-label>
+              <p [innerHTML]="msg.text"></p>
+            </ion-label>
+          </div>
+        </ion-item>
+
+        <ion-item *ngIf="isLoading" class="message-item">
+          <div class="message-bubble bot-bubble">
+            <ion-avatar slot="start" class="bot-avatar">
+              <img src="assets/icon/bot_avatar.png" />
+            </ion-avatar>
+            <ion-label>
+              <ion-spinner name="dots" color="primary"></ion-spinner>
+            </ion-label>
+          </div>
+        </ion-item>
+      </ion-list>
+
+      <div #chatEnd></div>
+    </ion-content>
+
+    <ion-footer class="chat-footer" [translucent]="true">
+      <ion-toolbar>
+        <ion-item lines="none" class="input-item">
+          <ion-input
+            [(ngModel)]="newMessage"
+            placeholder="Escribe tu pregunta..."
+            (keyup.enter)="sendMessage()"
+            [disabled]="isLoading"
+          ></ion-input>
+          <ion-button
+            (click)="sendMessage()"
+            [disabled]="isLoading || newMessage.trim() === ''"
+            fill="clear"
+            slot="end"
+          >
+            <ion-icon name="send-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-template>
+</ion-modal>

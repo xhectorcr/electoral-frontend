@@ -28,3 +28,4 @@ export interface ElectorResponse {
   longitude?: number;
   tableLocationDetail?: string;
 }
+

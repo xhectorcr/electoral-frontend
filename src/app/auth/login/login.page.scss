@@ -36,7 +36,7 @@
   --padding-end: 0;
   width: 40px;
   height: 40px;
-  
+
   ion-icon {
     font-size: 1.8rem;
   }
@@ -67,7 +67,7 @@
   border-radius: 10px;
   --highlight-height: 0;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  --color: var(--onpe-text); 
+  --color: var(--onpe-text);
   --placeholder-color: #999999;
 }
 
@@ -101,6 +101,12 @@
   color: var(--onpe-primary);
   font-size: 1.2rem;
   margin-right: 0.3rem;
+}
+
+.login-segment {
+  margin-bottom: 24px;
+  --background: #f0f4f9;
+  border-radius: 12px;
 }
 
 @keyframes fadeIn {

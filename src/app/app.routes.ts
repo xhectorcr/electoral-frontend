@@ -151,4 +151,8 @@ export const routes: Routes = [
     path: 'calendar',
     loadComponent: () => import('./public/calendar/calendar.page').then( m => m.CalendarPage)
   },
+  {
+    path: 'chatbot',
+    loadComponent: () => import('./shared/components/chatbot/chatbot.page').then( m => m.ChatbotPage)
+  },
 ];

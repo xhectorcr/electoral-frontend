@@ -16,10 +16,6 @@ export class ElectorService {
 
   constructor(private http: HttpClient) {}
 
-  getMyVotingInfo(): Observable<ElectorResponse> {
-    return this.http.get<ElectorResponse>(`${this.baseUrl}/my-info`);
-  }
-
   createElectorEntry(request: ElectorRequest): Observable<ElectorResponse> {
     return this.http.post<ElectorResponse>(`${this.adminBaseUrl}`, request);
   }
@@ -38,5 +34,21 @@ export class ElectorService {
     const formData = new FormData();
     formData.append('file', file);
     return this.http.post<any>(`${this.adminBaseUrl}/upload-csv`, formData);
+  }
+
+  getMyVotingInfo(): Observable<ElectorResponse> {
+    return this.http.get<ElectorResponse>(`${this.baseUrl}/my-info`);
+  }
+
+  getPublicVotingInfoByDni(dni: string): Observable<ElectorResponse> {
+    return this.http.get<ElectorResponse>(
+      `${this.baseUrl}/public/find-by-dni/${dni}`
+    );
+  }
+
+  getAllTestElectors(): Observable<ElectorResponse[]> {
+    return this.http.get<ElectorResponse[]>(
+      `${this.baseUrl}/public/test-electors`
+    );
   }
 }
