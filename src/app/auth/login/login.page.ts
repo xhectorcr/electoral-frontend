@@ -7,9 +7,11 @@ import {
   IonIcon,
   IonInput,
   IonItem,
+  NavController,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
+  arrowBackOutline,
   eyeOffOutline,
   eyeOutline,
   lockClosedOutline,
@@ -23,6 +25,7 @@ addIcons({
   'lock-closed-outline': lockClosedOutline,
   'eye-outline': eyeOutline,
   'eye-off-outline': eyeOffOutline,
+  'arrow-back-outline': arrowBackOutline,
 });
 
 @Component({
@@ -38,7 +41,11 @@ export class LoginPage {
   loading = false;
   showPassword = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private navCtrl: NavController
+  ) {}
 
   togglePassword() {
     this.showPassword = !this.showPassword;
@@ -76,11 +83,16 @@ export class LoginPage {
       },
     });
   }
+
   forgotPassword() {
     alert('Función de recuperación aún no implementada.');
   }
 
   goToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  goBack() {
+    this.navCtrl.back();
   }
 }
