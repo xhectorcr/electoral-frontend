@@ -15,7 +15,6 @@
   column-gap: 4px;
 }
 
-/* BOTÓN */
 .custom-tab-bar ion-tab-button {
   flex: 1;
   display: flex;
@@ -28,7 +27,6 @@
   transition: all 0.25s ease;
 }
 
-/* ICONO */
 .custom-tab-bar ion-tab-button ion-icon {
   font-size: 1.45rem;
   margin-bottom: 1px;
@@ -36,7 +34,6 @@
   transition: transform 0.22s ease, opacity 0.2s, color 0.2s;
 }
 
-/* LABEL */
 .custom-tab-bar ion-tab-button ion-label {
   font-size: 0.7rem;
   font-weight: 600;
@@ -60,7 +57,6 @@
   color: var(--onpe-primary);
 }
 
-/* Mobile */
 @media (max-width: 480px) {
   .custom-tab-bar {
     height: 65px;
@@ -74,3 +70,4 @@
     font-size: 0.64rem;
   }
 }
+
