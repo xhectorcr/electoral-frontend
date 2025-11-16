@@ -39,29 +39,30 @@
 
 :root {
   /* Colores principales */
-  --onpe-primary:        #2e6bc7;  /* rhino-700 */
-  --onpe-primary-light:  #4c9be5;  /* rhino-500 */
-  --onpe-primary-dark:   #22406e;  /* rhino-900 */
+  --onpe-primary: #2e6bc7; /* rhino-700 */
+  --onpe-primary-light: #4c9be5; /* rhino-500 */
+  --onpe-primary-dark: #22406e; /* rhino-900 */
 
   /* Colores secundarios */
-  --onpe-secondary:        #6eb7ec;  /* rhino-400 */
-  --onpe-secondary-light:  #9cd2f4;  /* rhino-300 */
-  --onpe-secondary-dark:   #2b57a2;  /* rhino-800 */
+  --onpe-secondary: #6eb7ec; /* rhino-400 */
+  --onpe-secondary-light: #9cd2f4; /* rhino-300 */
+  --onpe-secondary-dark: #2b57a2; /* rhino-800 */
 
   /* Énfasis y estados */
-  --onpe-accent:      #3780d9; /* rhino-600 */
-  --onpe-info:        #c5e3f8; /* rhino-200 */
-  --onpe-highlight:   #f0f8fe; /* rhino-50 */
+  --onpe-accent: #3780d9; /* rhino-600 */
+  --onpe-info: #c5e3f8; /* rhino-200 */
+  --onpe-highlight: #f0f8fe; /* rhino-50 */
 
   /* Fondo y bordes */
-  --onpe-background:    #f0f8fe; /* rhino-50 */
-  --onpe-surface:       #deeefb; /* rhino-100 */
-  --onpe-border:        #c5e3f8; /* rhino-200 */
+  --onpe-background: #f0f8fe; /* rhino-50 */
+  --onpe-surface: #deeefb; /* rhino-100 */
+  --onpe-border: #c5e3f8; /* rhino-200 */
 
   /* Texto */
-  --onpe-text:          #000000;  /* rhino-950 */
-  --onpe-text-light:    #ffffff;  /* rhino-800 */
-
-
+  --onpe-text: #000000; /* rhino-950 */
+  --onpe-text-light: #ffffff; /* rhino-800 */
 }
 
+ion-tabs ion-content {
+  --padding-bottom: 70px;
+}

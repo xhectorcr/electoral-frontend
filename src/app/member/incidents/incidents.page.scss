@@ -1,0 +1,79 @@
+.page-background {
+  --background: #f4f5f7;
+}
+
+.sticky-segment {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  --background: #ffffff; 
+}
+
+.incident-list {
+  background: transparent;
+  padding: 0 16px;
+}
+
+ion-list-header {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.incident-item {
+  --background: #ffffff;
+  --border-radius: 12px;
+  --padding-start: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.incident-item:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.incident-item ion-label h2 {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.incident-item ion-label p {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.incident-icon {
+  font-size: 2rem;
+  margin-right: 12px;
+}
+
+.status-chip {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+ion-chip[color="danger"] {
+  --color: var(--ion-color-danger);
+  --border-color: var(--ion-color-danger);
+}
+
+ion-chip[color="success"] {
+  --color: var(--ion-color-success);
+  --border-color: var(--ion-color-success);
+}
+
+.no-results-item {
+  --background: #ffffff;
+  --border-radius: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.no-results-item ion-icon {
+  font-size: 1.5rem;
+  margin-right: 8px;
+}

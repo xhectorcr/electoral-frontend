@@ -1,0 +1,64 @@
+<ion-content class="login-content" fullscreen>
+  <div class="login-wrapper">
+    <div class="login-container">
+      <img src="assets/logo.png" alt="ONPE Logo" class="login-logo" />
+
+      <h1 class="login-title">Bienvenido</h1>
+      <p class="login-subtitle">Ingresa tus datos para continuar</p>
+
+      <form (ngSubmit)="login()">
+        <ion-item class="login-item" lines="none">
+          <ion-icon
+            slot="start"
+            name="mail-outline"
+            class="login-icon"
+          ></ion-icon>
+          <ion-input
+            type="email"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="Correo electrónico"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item class="login-item" lines="none">
+          <ion-icon
+            slot="start"
+            name="lock-closed-outline"
+            class="login-icon"
+          ></ion-icon>
+          <ion-input
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Contraseña"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" class="login-button">
+          Ingresar
+        </ion-button>
+      </form>
+
+      <ion-button
+        expand="block"
+        fill="clear"
+        class="register-button"
+        (click)="goToRegister()"
+      >
+        Crear cuenta
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="clear"
+        class="forgot-button"
+        (click)="forgotPassword()"
+      >
+        ¿Olvidaste tu contraseña?
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

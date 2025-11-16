@@ -1,0 +1,34 @@
+<ion-menu side="start" content-id="member-router-outlet">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Miembro de mesa</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="./dashboard" routerDirection="root">
+        <ion-icon name="home-outline" slot="start"></ion-icon>
+        <ion-label>Dashboard</ion-label>
+      </ion-item>
+      <ion-item routerLink="./voters" routerDirection="root">
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        <ion-label>Votantes</ion-label>
+      </ion-item>
+      <ion-item routerLink="./incidents" routerDirection="root">
+        <ion-icon name="warning-outline" slot="start"></ion-icon>
+        <ion-label>Incidentes</ion-label>
+      </ion-item>
+      <ion-item routerLink="./manual" routerDirection="root">
+        <ion-icon name="book-outline" slot="start"></ion-icon>
+        <ion-label>Manual</ion-label>
+      </ion-item>
+      <ion-item routerLink="./settings" routerDirection="root">
+        <ion-icon name="settings-outline" slot="start"></ion-icon>
+        <ion-label>Configuración</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="member-router-outlet"></ion-router-outlet>

@@ -1,0 +1,85 @@
+.parties-content {
+  --background: #f4f7fa;
+  padding: 1rem;
+}
+
+.parties-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.party-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  ion-card-header {
+    color: #fff;
+    padding: 1rem;
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .party-logo {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        border-radius: 50%;
+        background: #fff;
+        padding: 5px;
+      }
+
+      .header-text {
+        ion-card-title {
+          font-size: 1.2rem;
+          font-weight: 700;
+
+          .acronym {
+            font-weight: 500;
+            color: #f0f0f0;
+            margin-left: 0.5rem;
+          }
+        }
+
+        .members {
+          font-size: 0.9rem;
+          color: #f3f3f3;
+          margin-top: 0.2rem;
+        }
+      }
+    }
+  }
+
+  ion-card-content {
+    background: #fff;
+    padding: 1rem;
+    p.description {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    ion-button {
+      --border-radius: 8px;
+      --font-weight: 600;
+      color: #fff;
+    }
+  }
+}

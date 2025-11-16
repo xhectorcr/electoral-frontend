@@ -1,0 +1,135 @@
+.page-background {
+  --background: #f4f7f8;
+}
+
+.hero-section {
+  background: var(--ion-color-primary, #1e3a8a);
+  color: white;
+  text-align: center;
+  padding: 32px 24px;
+  border-radius: 0 0 30px 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section ion-icon {
+  font-size: 3.5rem;
+  opacity: 0.8;
+}
+
+.hero-section h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.hero-section p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-top: 8px;
+}
+
+.info-card {
+  margin: 20px 16px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+  --background: #ffffff;
+}
+
+.card-title {
+  color: var(--ion-color-primary, #1e3a8a);
+  font-size: 1.3rem;
+}
+
+.intro-text {
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.benefit-list ion-label {
+  font-weight: 500;
+  color: #333;
+}
+
+.section-title {
+  margin: 28px 20px 16px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #222;
+  padding-left: 12px;
+  border-left: 4px solid var(--ion-color-primary, #1e3a8a);
+}
+
+.timeline-card {
+  margin: 16px;
+  border-radius: 12px;
+  border-left: 5px solid var(--ion-color-primary, #1e3a8a);
+}
+
+.timeline-card ion-card-subtitle {
+  font-weight: 600;
+  color: #666;
+}
+
+.timeline-card ion-card-title {
+  color: var(--ion-color-primary, #1e3a8a);
+}
+
+.duties-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.duties-list li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.duties-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--ion-color-primary, #1e3a8a);
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.sanction-card {
+  border-top: 5px solid var(--ion-color-danger, #eb445a);
+}
+.sanction-card ion-card-title {
+  color: var(--ion-color-danger, #eb445a);
+}
+.sanction-card ion-icon {
+  color: var(--ion-color-danger, #eb445a);
+  font-size: 1.5rem;
+  margin-right: 8px;
+}
+.sanction-card ion-card-header {
+  display: flex;
+  align-items: center;
+}
+.sanction-card .duties-list li::before {
+  color: var(--ion-color-danger, #eb445a);
+}
+
+.obligation-card {
+  border-top: 5px solid var(--ion-color-success, #2dd36f);
+}
+.obligation-card ion-card-title {
+  color: var(--ion-color-success, #2dd36f);
+}
+.obligation-card .duties-list li::before {
+  color: var(--ion-color-success, #2dd36f);
+}
+
+.footer-text {
+  text-align: center;
+  margin: 24px;
+  color: #888;
+  font-weight: 500;
+}

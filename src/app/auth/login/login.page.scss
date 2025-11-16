@@ -1,0 +1,99 @@
+/* Fondo de la app */
+.login-content {
+  --background: var(--onpe-background);
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  background: var(--onpe-surface);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.login-logo {
+  width: 100px;
+  margin-bottom: 1rem;
+  animation: scaleUp 0.5s ease-in-out;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--onpe-primary-dark);
+  margin-bottom: 0.2rem;
+}
+
+.login-subtitle {
+  font-size: 0.95rem;
+  color: var(--onpe-primary);
+  margin-bottom: 2rem;
+}
+
+.login-item {
+  margin-bottom: 1rem;
+  --background: var(--onpe-background);
+  border-radius: 10px;
+  --highlight-height: 0;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  --color: var(--onpe-text); 
+  --placeholder-color: #999999;
+}
+
+.login-icon {
+  color: var(--onpe-primary);
+}
+
+.login-button {
+  --background: var(--onpe-primary);
+  --color: var(--onpe-text-light);
+  --border-radius: 10px;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.register-button {
+  color: var(--onpe-primary);
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.forgot-button {
+  color: var(--onpe-secondary);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

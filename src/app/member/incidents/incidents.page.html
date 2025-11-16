@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Reporte de Incidentes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page-background">
+  <ion-segment
+    [(ngModel)]="selectedSegment"
+    (ionChange)="filterIncidents()"
+    color="primary"
+    class="sticky-segment"
+  >
+    <ion-segment-button value="all">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pending">
+      <ion-label>Pendientes</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="resolved">
+      <ion-label>Resueltos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-list class="incident-list">
+    <ion-list-header>
+      Mostrando {{ filteredIncidents.length }} incidentes
+    </ion-list-header>
+
+    <ion-item
+      *ngIf="filteredIncidents.length === 0"
+      lines="none"
+      class="no-results-item"
+    >
+      <ion-icon
+        name="checkmark-circle-outline"
+        slot="start"
+        color="success"
+      ></ion-icon>
+      <ion-label>No hay incidentes para mostrar.</ion-label>
+    </ion-item>
+
+    <ion-item
+      *ngFor="let incident of filteredIncidents; trackBy: trackIncident"
+      class="incident-item"
+      lines="none"
+      button
+      (click)="viewIncident(incident)"
+    >
+      <ion-icon
+        [name]="getIconForType(incident.type)"
+        slot="start"
+        class="incident-icon"
+        [color]="incident.status === 'resolved' ? 'medium' : 'danger'"
+      ></ion-icon>
+      <ion-label>
+        <h2>{{ incident.title }}</h2>
+        <p>{{ incident.time }} - {{ incident.type }}</p>
+      </ion-label>
+      <ion-chip
+        [color]="incident.status === 'resolved' ? 'success' : 'danger'"
+        slot="end"
+        outline="true"
+        class="status-chip"
+      >
+        <ion-label>
+          {{ incident.status === 'resolved' ? 'Resuelto' : 'Pendiente' }}
+        </ion-label>
+      </ion-chip>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    (click)="addNewIncident()"
+  >
+    <ion-fab-button color="danger">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

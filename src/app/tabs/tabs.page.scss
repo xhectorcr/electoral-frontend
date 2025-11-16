@@ -1,0 +1,76 @@
+.custom-tab-bar {
+  --background: #ffffff;
+  --color: #9a9a9a;
+  --color-selected: var(--onpe-primary);
+  --border: 0;
+
+  height: 70px;
+  padding: 6px 10px env(safe-area-inset-bottom);
+  border-top: 1px solid #e6e6e6;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  column-gap: 4px;
+}
+
+/* BOTÓN */
+.custom-tab-bar ion-tab-button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 6px 4px;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+}
+
+/* ICONO */
+.custom-tab-bar ion-tab-button ion-icon {
+  font-size: 1.45rem;
+  margin-bottom: 1px;
+  opacity: 0.8;
+  transition: transform 0.22s ease, opacity 0.2s, color 0.2s;
+}
+
+/* LABEL */
+.custom-tab-bar ion-tab-button ion-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0.75;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.custom-tab-bar ion-tab-button.tab-selected {
+  background: rgba(var(--onpe-primary-rgb), 0.13);
+  border-radius: 16px;
+}
+
+.custom-tab-bar ion-tab-button.tab-selected ion-icon {
+  transform: scale(1.12);
+  opacity: 1;
+  color: var(--onpe-primary);
+}
+
+.custom-tab-bar ion-tab-button.tab-selected ion-label {
+  opacity: 1;
+  color: var(--onpe-primary);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .custom-tab-bar {
+    height: 65px;
+  }
+
+  .custom-tab-bar ion-tab-button ion-icon {
+    font-size: 1.35rem;
+  }
+
+  .custom-tab-bar ion-tab-button ion-label {
+    font-size: 0.64rem;
+  }
+}

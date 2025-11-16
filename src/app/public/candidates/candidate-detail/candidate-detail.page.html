@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Perfil del Candidato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="candidate" class="page-bg">
+  <div class="profile-header">
+    <div class="photo-wrapper">
+      <img [src]="candidate.photo" class="profile-photo" />
+    </div>
+
+    <h2 class="name">{{ candidate.name }}</h2>
+    <p class="position">{{ candidate.position }}</p>
+
+    <ion-badge class="party-badge">{{ candidate.party }}</ion-badge>
+  </div>
+
+  <ion-card class="info-card">
+    <ion-card-header>
+      <ion-card-title>Información General</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label><strong>Edad</strong></ion-label>
+          <p>{{ candidate.age || '—' }}</p>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Lugar de nacimiento</strong></ion-label>
+          <p>{{ candidate.birthPlace || '—' }}</p>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Formación -->
+  <ion-card class="section-card">
+    <ion-card-header>
+      <ion-card-title>Formación Académica</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ candidate.education || 'Información no disponible' }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Cargos -->
+  <ion-card class="section-card">
+    <ion-card-header>
+      <ion-card-title>Cargos Anteriores</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ candidate.previousPositions || 'Información no disponible' }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

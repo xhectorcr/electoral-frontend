@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Elecciones Perú 2026</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="section-title">Candidatos 2026</div>
+
+  <ion-item class="search-item" lines="none">
+    <ion-icon name="search-outline" slot="start"></ion-icon>
+    <ion-input
+      placeholder="Buscar por nombre o partido"
+      [(ngModel)]="searchTerm"
+      (ionInput)="filterCandidates()"
+      [clearInput]="true"
+    ></ion-input>
+  </ion-item>
+
+  <!-- 3. Tags (Filtros) -->
+  <ion-segment
+    [(ngModel)]="selectedTag"
+    (ionChange)="filterCandidates()"
+    color="primary"
+    scrollable="true"
+    class="tags-segment"
+  >
+    <ion-segment-button *ngFor="let tag of tags" [value]="tag">
+      <ion-label>{{ tag }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- 4. Texto de Conteo de Resultados -->
+  <div class="results-summary">
+    Mostrando {{ filteredCandidates.length }} de {{ candidates.length }}
+    candidatos
+  </div>
+
+  <!-- 5. Tarjetas de Candidatos -->
+  <div class="candidates-grid">
+    <ion-card
+      *ngFor="let candidate of filteredCandidates"
+      class="candidate-card"
+    >
+      <img
+        [src]="candidate.photo"
+        alt="{{ candidate.name }}"
+        class="candidate-photo"
+        (error)="onImageError($event, candidate)"
+      />
+      <ion-card-header>
+        <div class="party-badge" [style.background]="candidate.color">
+          {{ candidate.party }}
+        </div>
+        <ion-card-title>{{ candidate.name }}</ion-card-title>
+        <ion-card-subtitle>{{ candidate.position }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-button
+          expand="full"
+          fill="solid"
+          color="primary"
+          (click)="viewDetails(candidate)"
+        >
+          Ver Perfil Completo
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
