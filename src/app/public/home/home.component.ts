@@ -22,11 +22,19 @@ addIcons({
 export class HomePage {
   constructor(private router: Router) {}
 
+
   navigateToCandidates() {
-    this.router.navigate(['/candidates']);
+   
+    this.router.navigate(['/tabs', 'tab2']);
   }
 
   navigateToCalendar() {
+   
     this.router.navigate(['/calendar']);
+  }
+
+  navigateToVote() {
+   
+    this.router.navigate(['/tabs', 'tab4']);
   }
 }
