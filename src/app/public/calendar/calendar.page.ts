@@ -45,6 +45,7 @@ import {
   CalendarEventType,
 } from 'src/app/core/model/calendar/calendar.model';
 import { CalendarService } from 'src/app/core/services/calendar/calendar.service';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 
 registerLocaleData(localePe, 'es-PE');
 
@@ -107,6 +108,7 @@ addIcons({
     IonButton,
     IonDatetime,
     IonNote,
+    HeaderComponent
   ],
   providers: [DatePipe],
 })

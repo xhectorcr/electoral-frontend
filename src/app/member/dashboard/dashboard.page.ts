@@ -10,6 +10,7 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
+  IonListHeader,
   IonMenuButton,
   IonSpinner,
   IonTitle,
@@ -41,6 +42,7 @@ addIcons({
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [
+    IonListHeader,
     IonContent,
     IonHeader,
     IonTitle,
@@ -123,6 +125,7 @@ export class DashboardPage implements OnInit {
   }
   manualVotacion() {
     console.log('Clic en Registrar Voto');
+    this.router.navigate(['/member/manual']);
   }
   reportarIncidencia() {
     console.log('Navegando a Incidentes para reportar...');

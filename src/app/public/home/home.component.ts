@@ -30,7 +30,7 @@ export class HomePage {
 
   navigateToCalendar() {
    
-    this.router.navigate(['/calendar']);
+    this.router.navigate(['/tabs', 'tab1']);
   }
 
   navigateToVote() {

@@ -16,6 +16,7 @@ import {
   IonRouterOutlet,
   IonTitle,
   IonToolbar,
+  IonMenuButton,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -60,6 +61,7 @@ addIcons({
     RouterModule,
     IonAvatar,
     IonListHeader,
+    IonMenuButton,
     IonNote,
   ],
 })
