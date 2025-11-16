@@ -1,0 +1,74 @@
+ion-header {
+  &.ion-no-border::after {
+    background-image: none;
+  }
+}
+
+.header-toolbar {
+  --background: #2196F3;
+  --color: #ffffff;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --min-height: 56px;
+
+  .header-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-align: left;
+    padding-left: 16px;
+  }
+
+  ion-buttons {
+    ion-button {
+      --color: #ffffff;
+      --color-hover: rgba(255, 255, 255, 0.8);
+
+      ion-icon {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+// Variantes de color (opcional)
+.header-toolbar {
+  // Azul principal (default)
+  &.primary {
+    --background: #2196F3;
+  }
+
+  // Rojo (para secciones importantes)
+  &.danger {
+    --background: #f44336;
+  }
+
+  // Oscuro
+  &.dark {
+    --background: #1976D2;
+  }
+
+  // Claro
+  &.light {
+    --background: #42A5F5;
+  }
+}
+
+// Responsive
+@media (min-width: 768px) {
+  .header-toolbar {
+    --min-height: 64px;
+
+    .header-title {
+      font-size: 1.25rem;
+      padding-left: 20px;
+    }
+  }
+}
+
+// Modo oscuro (si lo necesitas)
+@media (prefers-color-scheme: dark) {
+  .header-toolbar {
+    --background: #1976D2;
+  }
+}

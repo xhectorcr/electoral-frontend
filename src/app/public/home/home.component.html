@@ -1,0 +1,172 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding">
+  <div class="home-container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <h1 class="main-title">Tu Voto Informado para 2026</h1>
+      <p class="subtitle">
+        Accede a información confiable sobre candidatos, planes de gobierno y
+        cronogramas electorales
+      </p>
+
+      <!-- Main Actions -->
+    <div class="actions-section">
+      <ion-button
+        expand="block"
+        color="primary"
+        size="large"
+        class="action-button"
+        (click)="navigateToCandidates()"
+      >
+        Explorar candidatos
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        color="primary"
+        size="large"
+        class="action-button"
+        (click)="navigateToCalendar()"
+      >
+        Ver Calendario
+      </ion-button>
+    </div>
+  </div>
+
+    <!-- Platform Info Section -->
+    <div class="info-section">
+      <h2 class="section-title">Explora la plataforma Electoral</h2>
+      <p class="section-description">
+        Accede a toda la información que necesitas para tomar decisiones
+        informadas
+      </p>
+    </div>
+
+    <!-- Calendar Card -->
+    <ion-card class="calendar-card" button (click)="navigateToCalendar()">
+      <ion-card-content>
+        <div class="card-header">
+          <ion-icon name="calendar" color="danger" class="card-icon"></ion-icon>
+          <div class="card-text">
+            <h3 class="card-title">Calendario electoral</h3>
+            <p class="card-subtitle">
+              Fechas clave de elecciones y eventos electorales 2026
+            </p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="calendar-card" button (click)="navigateToCalendar()">
+      <ion-card-content>
+        <div class="card-header">
+          <ion-icon name="calendar" color="danger" class="card-icon"></ion-icon>
+          <div class="card-text">
+            <h3 class="card-title">Candidatos y agrupaciones</h3>
+            <p class="card-subtitle">
+              Conoce los candidatos, sus planes y propuestas políticas
+            </p>
+          </div>
+        </div>
+      </ion-card-content>
+      </ion-card>
+
+      <ion-card class="calendar-card" button (click)="navigateToCalendar()">
+      <ion-card-content>
+        <div class="card-header">
+          <ion-icon name="calendar" color="danger" class="card-icon"></ion-icon>
+          <div class="card-text">
+            <h3 class="card-title">Ubicación de votación</h3>
+            <p class="card-subtitle">
+              Encuentra tu centro de votacióncon geolocalización
+            </p>
+          </div>
+        </div>
+      </ion-card-content>
+      </ion-card>
+
+      <ion-card class="calendar-card" button (click)="navigateToCalendar()">
+      <ion-card-content>
+        <div class="card-header">
+          <ion-icon name="calendar" color="danger" class="card-icon"></ion-icon>
+          <div class="card-text">
+            <h3 class="card-title">Mienbros de mesa</h3>
+            <p class="card-subtitle">
+              Instucciones y cronogramas para miembros de mesa
+            </p>
+          </div>
+        </div>
+      </ion-card-content>
+      </ion-card>
+
+      <ion-card class="calendar-card" button (click)="navigateToCalendar()">
+      <ion-card-content>
+        <div class="card-header">
+          <ion-icon name="calendar" color="danger" class="card-icon"></ion-icon>
+          <div class="card-text">
+            <h3 class="card-title">Marco legal</h3>
+            <p class="card-subtitle">
+              Informacion legal y regulatoria sobre elecciones
+            </p>
+          </div>
+        </div>
+      </ion-card-content>
+      </ion-card>
+
+      <!-- Statistics Section -->
+      <div class="stats-section">
+        <div class="stat-item">
+          <span class="stat-year">2026</span>
+          <p class="stat-label">Año de elecciones generales</p>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">+50</span>
+          <p class="stat-label">Candidatos por consultar</p>
+        </div>
+        <div class="stat-item">
+          <span class="stat-percentage">100%</span>
+          <p class="stat-label">Información verificada</p>
+        </div>
+      </div>
+
+      <!-- Platform Info Section -->
+      <div class="platform-section">
+        <h3 class="platform-title">Plataforma</h3>
+        <ul class="platform-list">
+          <li>Candidatos</li>
+          <li>Propuestas</li>
+        </ul>
+      </div>
+
+      <!-- Information Section -->
+      <div class="info-links-section">
+        <h3 class="info-title">Información</h3>
+        <ul class="info-list">
+          <li>Marco legal</li>
+          <li>Votación</li>
+          <li>Miembros de mesa</li>
+        </ul>
+      </div>
+
+      <!-- Resources Section -->
+      <div class="resources-section">
+        <h3 class="resources-title">Recursos</h3>
+        <ul class="resources-list">
+          <li>Preguntas frecuentes</li>
+          <li>Contacto</li>
+        </ul>
+      </div>
+
+      <!-- About Section -->
+      <div class="about-section">
+        <h3 class="about-title">Sobre Nosotros</h3>
+        <p class="about-text">
+          Plataforma de información electoral para ciudadanas peruanas 2026.
+        </p>
+      </div>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>
