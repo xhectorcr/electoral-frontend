@@ -1,12 +1,12 @@
 <app-header></app-header>
 
-<ion-content [fullscreen]="true" class="parties-content">
+<ion-content [fullscreen]="true" class="ion-padding">
   <div *ngIf="loading" class="loading-container">
     <ion-spinner name="crescent" color="primary"></ion-spinner>
     <p>Cargando partidos...</p>
   </div>
 
-  <div class="parties-grid" *ngIf="!loading">
+  <div class="parties-grid" *ngIf="!loading" style="margin-bottom: 20px;">
     <ion-card *ngFor="let party of parties" class="party-card">
       <ion-card-content class="party-card-content">
         <div class="logo-wrapper">
