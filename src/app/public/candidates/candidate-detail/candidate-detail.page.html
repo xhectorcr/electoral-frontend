@@ -10,48 +10,156 @@
 <ion-content *ngIf="candidate" class="page-bg">
   <div class="profile-header">
     <div class="photo-wrapper">
-      <img [src]="candidate.imageUrl" class="profile-photo" />
+      <img
+        [src]="candidate.imageUrl"
+        class="profile-photo"
+        (error)="onImageError($event)"
+      />
     </div>
-
     <h2 class="name">{{ candidate.fullName }}</h2>
     <p class="position">{{ candidate.office }}</p>
-
     <ion-badge class="party-badge">{{ candidate.partyName }}</ion-badge>
-  </div> 
+  </div>
 
-  <!-- <ion-card class="info-card">
-    <ion-card-header>
-      <ion-card-title>Información General</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list lines="none">
-        <ion-item>
-          <ion-label><strong>Edad</strong></ion-label>
-          <p>{{ candidate.age || '—' }}</p>
-        </ion-item>
-        <ion-item>
-          <ion-label><strong>Lugar de nacimiento</strong></ion-label>
-          <p>{{ candidate.birthPlace || '—' }}</p>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <div class="content-wrapper" *ngIf="candidate.hdv">
+    <ion-card class="section-card">
+      <ion-card-header>
+        <ion-card-title>Información General</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none" class="info-list">
+          <ion-item class="info-item">
+            <ion-icon
+              name="location-outline"
+              slot="start"
+              color="primary"
+            ></ion-icon>
+            <ion-label position="stacked">Nacimiento</ion-label>
+            <p>{{ candidate.hdv.placeOfBirth || 'No registra' }}</p>
+          </ion-item>
+          <ion-item class="info-item">
+            <ion-icon
+              name="map-outline"
+              slot="start"
+              color="primary"
+            ></ion-icon>
+            <ion-label position="stacked">Postula por Región</ion-label>
+            <p>{{ candidate.region || 'No registra' }}</p>
+          </ion-item>
+          <ion-item class="info-item">
+            <ion-icon
+              name="home-outline"
+              slot="start"
+              color="primary"
+            ></ion-icon>
+            <ion-label position="stacked">Dirección</ion-label>
+            <p>{{ candidate.hdv.address || 'No registra' }}</p>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 
-  <ion-card class="section-card">
-    <ion-card-header>
-      <ion-card-title>Formación Académica</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ candidate.education || 'Información no disponible' }}</p>
-    </ion-card-content>
-  </ion-card>
+    <ion-card class="section-card">
+      <ion-card-header>
+        <ion-card-title>Formación Académica</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none" class="info-list">
+          <ion-item class="info-item">
+            <ion-icon
+              name="school-outline"
+              slot="start"
+              color="primary"
+            ></ion-icon>
+            <ion-label position="stacked">Formación Académica</ion-label>
+            <p>{{ candidate.hdv.academicFormation || 'No registra' }}</p>
+          </ion-item>
+          <ion-item class="info-item">
+            <ion-icon
+              name="book-outline"
+              slot="start"
+              color="primary"
+            ></ion-icon>
+            <ion-label position="stacked">Estudios Técnicos</ion-label>
+            <p>{{ candidate.hdv.technicalStudies || 'No registra' }}</p>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 
-  <ion-card class="section-card">
-    <ion-card-header>
-      <ion-card-title>Cargos Anteriores</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ candidate.previousPositions || 'Información no disponible' }}</p>
-    </ion-card-content>
-  </ion-card> -->
+    <ion-card class="section-card">
+      <ion-card-header>
+        <ion-card-title>Experiencia Laboral</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none" class="info-list">
+          <ion-item class="info-item">
+            <ion-icon
+              name="briefcase-outline"
+              slot="start"
+              color="primary"
+            ></ion-icon>
+            <ion-label position="stacked">Ocupaciones</ion-label>
+            <p>{{ candidate.hdv.occupations || 'No registra' }}</p>
+          </ion-item>
+          <ion-item class="info-item">
+            <ion-icon
+              name="briefcase-outline"
+              slot="start"
+              color="primary"
+            ></ion-icon>
+            <ion-label position="stacked">Experiencia</ion-label>
+            <p>{{ candidate.hdv.employmentRecord || 'No registra' }}</p>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="section-card">
+      <ion-card-header>
+        <ion-card-title>Cargos Anteriores</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none" class="info-list">
+          <ion-item class="info-item">
+            <ion-icon
+              name="id-card-outline"
+              slot="start"
+              color="primary"
+            ></ion-icon>
+            <ion-label position="stacked">Cargos</ion-label>
+            <p>{{ candidate.hdv.previousPositions || 'No registra' }}</p>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="section-card">
+      <ion-card-header>
+        <ion-card-title>Enlaces de Interés</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="link-buttons">
+        <ion-button
+          expand="block"
+          fill="outline"
+          color="primary"
+          [href]="candidate.resumeUrl"
+          target="_blank"
+        >
+          <ion-icon name="document-text-outline" slot="start"></ion-icon>
+          Hoja de Vida (PDF)
+        </ion-button>
+        <ion-button
+          expand="block"
+          fill="outline"
+          color="primary"
+          [href]="candidate.planUrl"
+          target="_blank"
+        >
+          <ion-icon name="link-outline" slot="start"></ion-icon>
+          Plan de Gobierno (PDF)
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

@@ -5,7 +5,7 @@ import { Tab1Page } from './tabs/tab1/tab1.page';
 import { TabsPage } from './tabs/tabs.page';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'tabs/tab1', pathMatch: 'full' },
+  { path: '', redirectTo: 'tabs/tab0', pathMatch: 'full' },
 
   {
     path: 'login',
@@ -17,20 +17,22 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./auth/register/register.page').then((m) => m.RegisterPage),
   },
+
   {
     path: 'tabs',
     component: TabsPage,
     children: [
       {
+        path: 'tab0',
+        loadComponent: () =>
+          import('./public/home/home.component').then((m) => m.HomePage),
+      },
+      {
         path: 'tab1',
-        component: Tab1Page,
-        children: [
-          {
-            path: '',
-            loadComponent: () =>
-              import('./public/home/home.component').then((m) => m.HomePage),
-          },
-        ],
+        loadComponent: () =>
+          import('./public/calendar/calendar.page').then(
+            (m) => m.CalendarPage
+          ),
       },
       {
         path: 'tab2',
@@ -74,7 +76,20 @@ export const routes: Routes = [
           },
         ],
       },
-      { path: '', redirectTo: '/tabs/tab1', pathMatch: 'full' },
+      {
+        path: 'tab5',
+        loadComponent: () =>
+          import('./tabs/tab5/tab5.page').then((m) => m.Tab5Page),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./public/news/news.page').then((m) => m.NewsPage),
+          },
+        ],
+      },
+
+      { path: '', redirectTo: '/tabs/tab0', pathMatch: 'full' },
     ],
   },
   {
@@ -121,9 +136,19 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
+
   {
     path: 'manual',
     loadComponent: () =>
       import('./member/manual/manual.page').then((m) => m.ManualPage),
+  },
+  {
+    path: 'news',
+    loadComponent: () =>
+      import('./public/news/news.page').then((m) => m.NewsPage),
+  },
+  {
+    path: 'calendar',
+    loadComponent: () => import('./public/calendar/calendar.page').then( m => m.CalendarPage)
   },
 ];

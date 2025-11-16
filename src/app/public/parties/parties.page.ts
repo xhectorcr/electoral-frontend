@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonButton,
   IonCard,
@@ -9,19 +10,26 @@ import {
   IonCardTitle,
   IonContent,
   IonHeader,
+  IonIcon,
+  IonSpinner,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import {
+  arrowForwardCircle,
+  documentTextOutline,
+  linkOutline,
+} from 'ionicons/icons';
+import { finalize } from 'rxjs';
+import { PartyResponse } from 'src/app/core/model/parties/parties.model';
+import { PartiesService } from 'src/app/core/services/parties/parties.service';
 
-interface Party {
-  name: string;
-  acronym: string;
-  members: number;
-  color: string;
-  logo?: string;
-  description?: string;
-  candidates?: number;
-}
+addIcons({
+  linkOutline,
+  documentTextOutline,
+  arrowForwardCircle,
+});
 
 @Component({
   selector: 'app-parties',
@@ -40,53 +48,47 @@ interface Party {
     IonButton,
     CommonModule,
     FormsModule,
+    IonIcon,
+    IonSpinner,
   ],
 })
 export class PartiesPage implements OnInit {
-  parties: Party[] = [];
+  parties: PartyResponse[] = [];
+  loading: boolean = false;
+
+  constructor(private partiesService: PartiesService, private router: Router) {}
 
   ngOnInit() {
-    this.parties = [
-      {
-        name: 'Partido A',
-        acronym: 'PA',
-        members: 25,
-        color: '#1976d2',
-        description: 'Partido con enfoque en educación y tecnología.',
-        candidates: 15,
-        logo: 'assets/logos/pa.png',
-      },
-      {
-        name: 'Partido B',
-        acronym: 'PB',
-        members: 18,
-        color: '#e64a19',
-        description: 'Partido enfocado en salud y desarrollo social.',
-        candidates: 10,
-        logo: 'assets/logos/pb.png',
-      },
-      {
-        name: 'Partido C',
-        acronym: 'PC',
-        members: 30,
-        color: '#388e3c',
-        description: 'Partido con políticas verdes y sostenibles.',
-        candidates: 20,
-        logo: 'assets/logos/pc.png',
-      },
-      {
-        name: 'Partido D',
-        acronym: 'PD',
-        members: 12,
-        color: '#fbc02d',
-        description: 'Partido centrado en economía y empleo.',
-        candidates: 8,
-        logo: 'assets/logos/pd.png',
-      },
-    ];
+    this.loadParties();
   }
 
-  viewDetails(party: Party) {
-    console.log('Ver detalles de:', party);
+  loadParties() {
+    this.loading = true;
+    this.partiesService
+      .getAllParties()
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          this.parties = data;
+        },
+        error: (err) => {
+          console.error('Error fetching parties:', err);
+          this.loading = false;
+        },
+      });
+  }
+
+  viewDetails(party: PartyResponse) {
+    sessionStorage.setItem('selectedParty', JSON.stringify(party));
+    this.router.navigate(['/party-detail', party.id]);
+  }
+
+  onImageError(event: Event, party: PartyResponse) {
+    const placeholder = `https://placehold.co/150x150/64748b/ffffff?text=${party.acronym}`;
+    (event.target as HTMLImageElement).src = placeholder;
   }
 }

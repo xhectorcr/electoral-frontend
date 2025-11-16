@@ -1,9 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { HeaderComponent } from "src/app/shared/components/header/header.component";
-import { FooterComponent } from "src/app/shared/components/footer/footer.component";
+import { addIcons } from 'ionicons';
+import { barChartOutline } from 'ionicons/icons';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+
+addIcons({
+  calendar: barChartOutline,
+});
 
 @Component({
   selector: 'app-home',
@@ -24,5 +30,3 @@ export class HomePage {
     this.router.navigate(['/calendar']);
   }
 }
-
-

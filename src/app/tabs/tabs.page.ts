@@ -4,7 +4,9 @@ import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import {
   calendarOutline,
+  homeOutline,
   informationCircleOutline,
+  newspaperOutline,
   peopleOutline,
   ribbonOutline,
 } from 'ionicons/icons';
@@ -14,6 +16,8 @@ addIcons({
   'people-outline': peopleOutline,
   'ribbon-outline': ribbonOutline,
   'information-circle-outline': informationCircleOutline,
+  'newspaper-outline': newspaperOutline,
+  'home-outline': homeOutline,
 });
 
 @Component({

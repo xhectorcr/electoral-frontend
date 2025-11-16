@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="title-header">Noticias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page-bg">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="news-container">
+    <h2 class="section-title">Últimas Noticias</h2>
+
+    <div *ngIf="isLoading" class="status-container">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+      <p>Cargando noticias...</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="status-container error">
+      <ion-icon name="warning-outline" color="danger"></ion-icon>
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <div
+      *ngIf="!isLoading && !errorMessage && newsList.length === 0"
+      class="status-container"
+    >
+      <ion-icon name="newspaper-outline" color="medium"></ion-icon>
+      <p>No hay noticias disponibles.</p>
+    </div>
+
+    <ion-card *ngFor="let news of newsList" class="news-card">
+      <ion-item lines="none" class="card-header-item">
+        <ion-icon
+          name="newspaper-outline"
+          slot="start"
+          color="primary"
+          class="news-icon"
+        ></ion-icon>
+        <ion-label>
+          <ion-note class="news-date"
+            >{{ news.published | date: 'd MMMM, yyyy h:mm a' }}</ion-note
+          >
+        </ion-label>
+      </ion-item>
+
+      <ion-card-content>
+        <ion-card-title class="news-title">{{ news.title }}</ion-card-title>
+        <p class="news-summary">{{ news.summary }}</p>
+      </ion-card-content>
+
+      <div class="button-footer">
+        <ion-button
+          fill="clear"
+          (click)="openLink(news.link)"
+          class="read-more-btn"
+        >
+          Leer más
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>

@@ -7,7 +7,6 @@ export interface PartyRequest {
   planOfGovernmentUrl?: string;
 }
 
-// party-response.model.ts
 export interface PartyResponse {
   id: number;
   name: string;

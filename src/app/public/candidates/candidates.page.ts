@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   IonButton,
+  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -15,8 +16,10 @@ import {
   IonInput,
   IonItem,
   IonLabel,
+  IonNote,
   IonSegment,
   IonSegmentButton,
+  IonSpinner,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
@@ -24,29 +27,38 @@ import { addIcons } from 'ionicons';
 import {
   addCircleOutline,
   barChartOutline,
+  briefcaseOutline,
   calendarOutline,
   checkmarkDoneOutline,
   listOutline,
+  mapOutline,
   newspaperOutline,
   peopleOutline,
   personOutline,
   ribbonOutline,
+  sadOutline,
+  schoolOutline,
   searchOutline,
 } from 'ionicons/icons';
-import { CandidateResponse } from 'src/app/core/model/candidates/candidates.model';
+import { finalize } from 'rxjs';
+import { CandidateResponseDTO } from 'src/app/core/model/candidates/candidates.model';
 import { CandidateService } from 'src/app/core/services/candidates/candidates.service';
 
 addIcons({
-  'search-outline': searchOutline,
-  'people-outline': peopleOutline,
-  'ribbon-outline': ribbonOutline,
-  'calendar-outline': calendarOutline,
-  'checkmark-done-outline': checkmarkDoneOutline,
-  'newspaper-outline': newspaperOutline,
-  'person-outline': personOutline,
-  'add-circle-outline': addCircleOutline,
-  'list-outline': listOutline,
-  'bar-chart-outline': barChartOutline,
+  searchOutline,
+  peopleOutline,
+  ribbonOutline,
+  calendarOutline,
+  checkmarkDoneOutline,
+  newspaperOutline,
+  personOutline,
+  addCircleOutline,
+  listOutline,
+  barChartOutline,
+  mapOutline,
+  schoolOutline,
+  briefcaseOutline,
+  sadOutline,
 });
 
 @Component({
@@ -55,6 +67,7 @@ addIcons({
   styleUrls: ['./candidates.page.scss'],
   standalone: true,
   imports: [
+    IonButtons,
     CommonModule,
     FormsModule,
     IonHeader,
@@ -73,19 +86,26 @@ addIcons({
     IonCardSubtitle,
     IonCardContent,
     IonButton,
+    IonSpinner,
+    IonNote,
   ],
 })
 export class CandidatesPage implements OnInit {
-  candidates: CandidateResponse[] = [];
-  filteredCandidates: CandidateResponse[] = [];
+  candidates: CandidateResponseDTO[] = [];
+  filteredCandidates: CandidateResponseDTO[] = [];
   searchTerm: string = '';
   tags: string[] = ['Todos', 'Presidente', 'Congresistas', 'Parlamento Andino'];
   selectedTag: string = 'Todos';
+  isLoading: boolean = false;
 
   officeMap: { [key: string]: string[] } = {
     Todos: [],
     Presidente: ['Presidencia'],
-    Congresistas: ['Primera Vicepresidencia', 'Segunda Vicepresidencia'],
+    Congresistas: [
+      'Congresista',
+      'Primera Vicepresidencia',
+      'Segunda Vicepresidencia',
+    ],
     'Parlamento Andino': ['Parlamento Andino'],
   };
 
@@ -99,15 +119,23 @@ export class CandidatesPage implements OnInit {
   }
 
   loadCandidates() {
-    this.candidateService.getAllActiveCandidates().subscribe({
-      next: (data) => {
-        this.candidates = data;
-        this.filteredCandidates = [...this.candidates];
-      },
-      error: (err) => {
-        console.error('Error fetching candidates:', err);
-      },
-    });
+    this.isLoading = true;
+    this.candidateService
+      .getAllActiveCandidates()
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          this.candidates = data;
+          this.filteredCandidates = [...this.candidates];
+        },
+        error: (err) => {
+          console.error('Error fetching candidates:', err);
+        },
+      });
   }
 
   filterCandidates() {
@@ -120,18 +148,19 @@ export class CandidatesPage implements OnInit {
         c.partyName.toLowerCase().includes(term);
 
       const matchesOffice =
-        this.selectedTag === 'Todos' || officesToFilter.includes(c.office);
+        this.selectedTag === 'Todos' ||
+        officesToFilter.some((office) => c.office.includes(office));
 
       return matchesTerm && matchesOffice;
     });
   }
 
-  viewDetails(candidate: CandidateResponse) {
+  viewDetails(candidate: CandidateResponseDTO) {
     sessionStorage.setItem('selectedCandidate', JSON.stringify(candidate));
-    this.router.navigate(['/candidate-detail', candidate.fullName]);
+    this.router.navigate(['/candidate-detail', candidate.id]);
   }
 
-  onImageError(event: Event, candidate: CandidateResponse) {
+  onImageError(event: Event, candidate: CandidateResponseDTO) {
     const placeholder = `https://placehold.co/300x300/64748b/ffffff?text=${candidate.fullName
       .charAt(0)
       .toUpperCase()}`;

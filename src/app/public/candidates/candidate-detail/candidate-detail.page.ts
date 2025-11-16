@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   IonBackButton,
   IonBadge,
+  IonButton,
   IonButtons,
   IonCard,
   IonCardContent,
@@ -12,13 +13,38 @@ import {
   IonCardTitle,
   IonContent,
   IonHeader,
+  IonIcon,
   IonItem,
   IonLabel,
   IonList,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { CandidateResponse } from 'src/app/core/model/candidates/candidates.model';
+import { addIcons } from 'ionicons';
+import {
+  bookOutline,
+  briefcaseOutline,
+  documentTextOutline,
+  homeOutline,
+  idCardOutline,
+  linkOutline,
+  locationOutline,
+  mapOutline,
+  schoolOutline,
+} from 'ionicons/icons';
+import { CandidateResponseDTO } from 'src/app/core/model/candidates/candidates.model';
+
+addIcons({
+  locationOutline,
+  mapOutline,
+  homeOutline,
+  schoolOutline,
+  bookOutline,
+  briefcaseOutline,
+  idCardOutline,
+  documentTextOutline,
+  linkOutline,
+});
 
 @Component({
   selector: 'app-candidate-detail',
@@ -43,10 +69,12 @@ import { CandidateResponse } from 'src/app/core/model/candidates/candidates.mode
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
+    IonIcon,
+    IonButton,
   ],
 })
 export class CandidateDetailPage implements OnInit {
-  candidate!: CandidateResponse;
+  candidate!: CandidateResponseDTO;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -55,7 +83,7 @@ export class CandidateDetailPage implements OnInit {
     if (stored) {
       this.candidate = JSON.parse(stored);
     } else {
-      this.router.navigate(['/candidates']);
+      this.router.navigate(['/tabs/tab2']);
     }
   }
 

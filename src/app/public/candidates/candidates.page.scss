@@ -2,6 +2,37 @@ ion-content {
   --background: #f4f5f7;
 }
 
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 12px;
+  color: #555;
+  font-weight: 500;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+
+  ion-icon {
+    font-size: 3rem;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
 .section-title {
   text-align: center;
   font-size: 1.4rem;
@@ -10,21 +41,18 @@ ion-content {
   margin: 20px 0 10px;
   font-family: "Inter", sans-serif;
 }
-
 .search-item {
   --background: #ffffff;
   --border-radius: 12px;
   margin: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
-
 .tags-segment {
   margin: 0 16px 16px 16px;
   --background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
-
 .results-summary {
   font-size: 0.9rem;
   color: #666;
@@ -36,15 +64,13 @@ ion-content {
   display: grid;
   gap: 16px;
   padding: 0 16px 16px;
-  grid-template-columns: 1fr; 
+  grid-template-columns: 1fr;
 }
-
 @media (min-width: 600px) {
   .candidates-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 @media (min-width: 960px) {
   .candidates-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -58,10 +84,9 @@ ion-content {
   overflow: hidden;
   margin: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .candidate-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
@@ -76,7 +101,7 @@ ion-content {
 
 .candidate-card ion-card-header {
   position: relative;
-  padding-top: 32px; 
+  padding: 24px 16px 16px 16px;
   text-align: center;
 }
 
@@ -89,6 +114,7 @@ ion-content {
   color: #fff;
   font-size: 0.8rem;
   font-weight: 600;
+  background: var(--ion-color-primary); 
 }
 
 .candidate-card ion-card-title {
@@ -103,12 +129,42 @@ ion-content {
   color: #555;
 }
 
-.candidate-card ion-card-content {
-  padding: 16px;
-  padding-top: 8px;
-  margin-top: auto; 
+.card-content-wrapper {
+  padding: 0 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
 }
 
-.candidate-card ion-button {
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+  text-align: left;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 16px;
+}
+
+.info-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+
+  ion-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  ion-note {
+    font-size: 0.85rem;
+    color: #444;
+    line-height: 1.4;
+  }
+}
+
+.details-button {
   --border-radius: 10px;
+  margin-top: auto;
 }

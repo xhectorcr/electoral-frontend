@@ -1,7 +1,7 @@
 export interface ReniecResponse {
-  firstName: string;
-  firstLastName: string;
-  secondLastName: string;
-  fullName: string;
-  documentNumber: string;
+  full_name: string;
+  document_number: string;
+  first_name: string;
+  first_last_name: string;
+  second_last_name: string;
 }

@@ -1,4 +1,22 @@
-export interface CandidateResponse {
+export interface HdvResponseDTO {
+  placeOfBirth: string;
+  departament: string;
+  province: string;
+  district: string;
+  address: string;
+  employmentRecord: string;
+
+  technicalStudies: string;
+  studyTime: string;
+  academicFormation: string;
+  previousPositions: string;
+
+  occupations: string;
+  since: string;
+  active: boolean;
+}
+
+export interface CandidateResponseDTO {
   id: number;
   fullName: string;
   documentNumber: string;
@@ -9,6 +27,7 @@ export interface CandidateResponse {
   resumeUrl: string;
   planUrl: string;
   active: boolean;
+  hdv: HdvResponseDTO;
 }
 
 // candidate-request.model.ts

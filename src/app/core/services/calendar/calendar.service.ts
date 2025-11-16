@@ -23,6 +23,18 @@ export class CalendarService {
     );
   }
 
+  getEventsByDateRange(
+    start: string,
+    end: string,
+    type?: 'GENERAL' | 'POLL_WORKER'
+  ): Observable<CalendarEventResponse[]> {
+    let url = `${this.baseUrl}/filter?start=${start}&end=${end}`;
+    if (type) {
+      url += `&type=${type}`;
+    }
+    return this.http.get<CalendarEventResponse[]>(url);
+  }
+
   createEvent(
     request: CalendarEventRequest
   ): Observable<CalendarEventResponse> {

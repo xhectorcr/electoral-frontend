@@ -1,9 +1,12 @@
 // candidate.service.ts
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CandidateRequest, CandidateResponse } from '../../model/candidates/candidates.model';
+import {
+  CandidateRequest,
+  CandidateResponseDTO,
+} from '../../model/candidates/candidates.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,26 +16,29 @@ export class CandidateService {
 
   constructor(private http: HttpClient) {}
 
-  createCandidate(request: CandidateRequest): Observable<CandidateResponse> {
-    return this.http.post<CandidateResponse>(this.baseUrl, request);
+  createCandidate(request: CandidateRequest): Observable<CandidateResponseDTO> {
+    return this.http.post<CandidateResponseDTO>(this.baseUrl, request);
   }
 
   updateCandidate(
     id: number,
     request: CandidateRequest
-  ): Observable<CandidateResponse> {
-    return this.http.put<CandidateResponse>(`${this.baseUrl}/${id}`, request);
+  ): Observable<CandidateResponseDTO> {
+    return this.http.put<CandidateResponseDTO>(
+      `${this.baseUrl}/${id}`,
+      request
+    );
   }
 
   deleteCandidate(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
-  getCandidateById(id: number): Observable<CandidateResponse> {
-    return this.http.get<CandidateResponse>(`${this.baseUrl}/${id}`);
+  getCandidateById(id: number): Observable<CandidateResponseDTO> {
+    return this.http.get<CandidateResponseDTO>(`${this.baseUrl}/${id}`);
   }
 
-  getAllActiveCandidates(): Observable<CandidateResponse[]> {
-    return this.http.get<CandidateResponse[]>(this.baseUrl);
+  getAllActiveCandidates(): Observable<CandidateResponseDTO[]> {
+    return this.http.get<CandidateResponseDTO[]>(this.baseUrl);
   }
 }

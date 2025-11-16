@@ -45,7 +45,6 @@ export class RegisterPage {
       return;
     }
 
-    // Aquí podrías agregar tu lógica de registro con API
     console.log('Registro OK', this.email, this.password);
     alert('Registro exitoso!');
     this.router.navigate(['/login']);

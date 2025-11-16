@@ -34,7 +34,20 @@
     candidatos
   </div>
 
-  <div class="candidates-grid">
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Cargando candidatos...</p>
+  </div>
+
+  <div
+    *ngIf="!isLoading && filteredCandidates.length === 0"
+    class="empty-state"
+  >
+    <ion-icon name="sad-outline" color="medium"></ion-icon>
+    <p>No se encontraron candidatos que coincidan con tu búsqueda.</p>
+  </div>
+
+  <div class="candidates-grid" *ngIf="!isLoading">
     <ion-card
       *ngFor="let candidate of filteredCandidates"
       class="candidate-card"
@@ -51,8 +64,30 @@
         <ion-card-subtitle>{{ candidate.office }}</ion-card-subtitle>
       </ion-card-header>
 
-      <ion-card-content>
+      <ion-card-content class="card-content-wrapper">
+        <ul class="info-list">
+          <li>
+            <ion-icon name="map-outline" color="primary"></ion-icon>
+            <ion-note
+              >Postula por: <strong>{{ candidate.region }}</strong></ion-note
+            >
+          </li>
+          <li>
+            <ion-icon name="school-outline" color="primary"></ion-icon>
+            <ion-note
+              >{{ candidate.hdv?.academicFormation | slice: 0:45 }}...</ion-note
+            >
+          </li>
+          <li>
+            <ion-icon name="briefcase-outline" color="primary"></ion-icon>
+            <ion-note
+              >{{ candidate.hdv?.employmentRecord | slice: 0:45 }}...</ion-note
+            >
+          </li>
+        </ul>
+
         <ion-button
+          class="details-button"
           expand="full"
           fill="solid"
           color="primary"
