@@ -1,4 +1,4 @@
-# Proyecto Angular 20 + Ionic 8 + TailwindCSS 3
+# Proyecto Angular 20 + Ionic 8 + SASS
 
 ## Requisitos
 
@@ -16,10 +16,6 @@ Asegúrate de tener instalado:
   ```
 ```bash
   npm install -g @ionic/cli
-  ```
-
-```bash
-  npm install -D tailwindcss@^3 postcss autoprefixer
   ```
 
 ## Correr el Proyecto
