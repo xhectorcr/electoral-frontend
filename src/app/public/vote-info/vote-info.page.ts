@@ -23,6 +23,7 @@ import { addIcons } from 'ionicons';
 import {
   closeCircleOutline,
   documentText,
+  easelOutline,
   idCardOutline,
   listCircleOutline,
   location,
@@ -50,6 +51,7 @@ addIcons({
   shieldCheckmarkOutline,
   listCircleOutline,
   idCardOutline,
+  easelOutline,
 });
 
 interface PollingStationData {
@@ -60,6 +62,7 @@ interface PollingStationData {
   imageUrl?: string;
   latitude?: number;
   longitude?: number;
+  tableLocationDetail?: string;
 }
 
 interface VoterDataView {
@@ -138,6 +141,7 @@ export class VoteInfoPage implements OnInit {
       return;
     }
 
+    // 1. Reiniciar estados
     this.isLoading = true;
     this.showResults = false;
     this.errorMessage = null;
@@ -163,7 +167,8 @@ export class VoteInfoPage implements OnInit {
         district: testElector.district,
         latitude: testElector.latitude,
         longitude: testElector.longitude,
-        imageUrl: 'assets/images/san_luis_gonzaga.png',
+        tableLocationDetail: testElector.tableLocationDetail,
+        imageUrl: 'assets/images/colegio_san_jose.png',
       };
 
       this.isLoading = false;

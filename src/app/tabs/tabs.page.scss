@@ -82,3 +82,6 @@ ion-content {
   }
 }
 
+:host ::ng-deep app-chatbot ion-fab {
+  bottom: 86px;
+}

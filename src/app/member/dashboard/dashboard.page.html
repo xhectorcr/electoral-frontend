@@ -7,10 +7,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true" class="page-background">
+<ion-content
+  *ngIf="user$ | async as user"
+  fullscreen="true"
+  class="page-background"
+>
   <div class="top-section">
-    <h2>{{ miembroNombre }}</h2>
-    <h3>{{ mesaNumero }}</h3>
+    <h2>{{ user.fullName }}</h2>
+
+    <h3 *ngIf="isLoadingMesa">Cargando mesa...</h3>
+    <h3 *ngIf="!isLoadingMesa && mesaData">
+      Mesa N° {{ mesaData.tableNumber }}
+    </h3>
+
     <div
       class="estado-badge"
       [class.abierta]="estadoMesa === 'Aperturada'"
@@ -19,7 +28,6 @@
       {{ estadoMesa }}
     </div>
   </div>
-
   <ion-card class="summary-card">
     <ion-card-content>
       <div class="row">
