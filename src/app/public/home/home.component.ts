@@ -34,7 +34,13 @@ export class HomePage {
   }
 
   navigateToVote() {
-   
+
     this.router.navigate(['/tabs', 'tab4']);
   }
+
+ navigateToLegal() {
+  window.open('https://portal.jne.gob.pe/portal_documentos/files/41f93b7f-d414-47e4-97cd-eec13b1cf6c8.pdf');
+}
+
+  
 }
