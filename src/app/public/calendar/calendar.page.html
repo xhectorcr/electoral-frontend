@@ -1,139 +1,135 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>Calendario</ion-title>
-  </ion-toolbar>
-</ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Calendario</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content [fullscreen]="true" class="page-background">
-  <div class="hero-section">
-    <h1>Calendario Electoral 2026</h1>
-    <p>Todas las fechas importantes del proceso electoral</p>
-  </div>
-
-  <div class="calendar-view-wrapper">
-    <ion-datetime
-      presentation="date"
-      locale="es-PE"
-      [multiple]="true"
-      [highlightedDates]="highlightedDates"
-      (ionChange)="onDateSelected($event)"
-      [value]="selectedDateValue"
-      first-day-of-week="1"
-    ></ion-datetime>
-
-    <ion-button
-      *ngIf="selectedStartDate"
-      (click)="clearDateFilter()"
-      fill="clear"
-      size="small"
-      class="clear-filter-btn"
-    >
-      <ion-icon name="refresh-outline" slot="start"></ion-icon>
-      Mostrar todos los eventos
-    </ion-button>
-  </div>
-
-  <div class="filter-section">
-    <div class="filter-group">
-      <ion-label class="filter-label">Filtrar por</ion-label>
-      <ion-segment
-        [(ngModel)]="selectedCategory"
-        (ionChange)="filterAndSortEvents()"
-        color="primary"
-        scrollable="true"
-      >
-        <ion-segment-button value="all">Todas</ion-segment-button>
-        <ion-segment-button
-          *ngFor="let category of categories"
-          [value]="category"
-        >
-          {{ category }}
-        </ion-segment-button>
-      </ion-segment>
-    </div>
-
-    <div class="filter-group">
-      <ion-label class="filter-label">Ordenar por</ion-label>
-      <ion-item lines="none" class="sort-item">
-        <ion-select
-          [(ngModel)]="sortOrder"
-          (ionChange)="filterAndSortEvents()"
-          interface="popover"
-          placeholder="Seleccionar"
-        >
-          <ion-select-option value="recent"
-            >Más reciente primero</ion-select-option
-          >
-          <ion-select-option value="distant"
-            >Más lejano primero</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
-    </div>
-  </div>
-
-  <div class="timeline-wrapper">
-    <h2 class="timeline-title" *ngIf="!isLoading && filteredEvents.length > 0">
-      {{ selectedStartDate ? 'Eventos en el rango' : 'Próximos Eventos' }}
-    </h2>
-
-    <div
-      class="timeline-line"
-      *ngIf="!isLoading && filteredEvents.length > 0"
-    ></div>
-
-    <div *ngIf="isLoading" class="status-state">
-      <ion-spinner name="crescent" color="primary"></ion-spinner>
-      <p>Cargando calendario...</p>
-    </div>
-
-    <div *ngIf="!isLoading && errorMessage" class="status-state error">
-      <ion-icon name="warning-outline" color="danger"></ion-icon>
-      <p>{{ errorMessage }}</p>
-    </div>
-
-    <div
-      *ngIf="!isLoading && !errorMessage && filteredEvents.length === 0"
-      class="status-state"
-    >
-      <ion-icon name="calendar-outline"></ion-icon>
-      <p>
-        {{ selectedStartDate ? 'No hay eventos en este rango.' : 
-        'No hay eventos que coincidan.' }}
-      </p>
-    </div>
-
-    <div *ngFor="let event of filteredEvents" class="timeline-item">
-      <div
-        class="event-dot"
-        [class.event-critical-dot]="event.severity === 'CRÍTICO'"
-        [class.event-important-dot]="event.severity === 'IMPORTANTE'"
-      >
-        <span class="month">{{ event.sortDate | date: 'MMM':'es-PE' }}</span>
-        <span class="day">{{ event.sortDate | date: 'd':'es-PE' }}</span>
+    <ion-content [fullscreen]="true" class="page-background">
+      <div class="hero-section">
+        <h1>Calendario Electoral 2026</h1>
+        <p>Todas las fechas importantes del proceso electoral</p>
       </div>
 
-      <ion-card
-        class="event-card"
-        [ngClass]="{
-          'event-critical': event.severity === 'CRÍTICO',
-          'event-important': event.severity === 'IMPORTANTE'
-        }"
-      >
-        <div class="event-severity">{{ event.severity }}</div>
-        <ion-card-header>
-          <div class="header-line">
-            <ion-chip outline="true" color="primary" class="event-category">
-              {{ event.category }}
-            </ion-chip>
-          </div>
-          <ion-card-title>{{ event.title }}</ion-card-title>
-          <ion-note class="event-date-mobile"
-            >📅 {{ event.displayDate }}</ion-note
+      <div class="calendar-view-wrapper">
+        <ion-datetime
+          presentation="date"
+          locale="es-PE"
+          [multiple]="true"
+          [highlightedDates]="highlightedDates"
+          (ionChange)="onDateSelected($event)"
+          [value]="selectedDateValue"
+          first-day-of-week="1"
+        ></ion-datetime>
+        <ion-button
+          *ngIf="selectedDateValue"
+          (click)="clearDateFilter()"
+          fill="clear"
+          size="small"
+          class="clear-filter-btn"
+        >
+          <ion-icon name="refresh-outline" slot="start"></ion-icon>
+          Mostrar todos los eventos
+        </ion-button>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-group">
+          <ion-label class="filter-label">Filtrar por</ion-label>
+          <ion-segment
+            [(ngModel)]="selectedCategory"
+            (ionChange)="filterAndSortEvents()"
+            color="primary"
+            scrollable="true"
           >
-        </ion-card-header>
-        <ion-card-content> {{ event.description }} </ion-card-content>
-      </ion-card>
-    </div>
-  </div>
-</ion-content>
+            <ion-segment-button value="all">Todas</ion-segment-button>
+            <ion-segment-button
+              *ngFor="let category of categories"
+              [value]="category"
+            >
+              {{ category }}
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+        <div class="filter-group">
+          <ion-label class="filter-label">Ordenar por</ion-label>
+          <ion-item lines="none" class="sort-item">
+            <ion-select
+              [(ngModel)]="sortOrder"
+              (ionChange)="filterAndSortEvents()"
+              interface="popover"
+              placeholder="Seleccionar"
+            >
+              <ion-select-option value="recent"
+                >Más reciente primero</ion-select-option
+              >
+              <ion-select-option value="distant"
+                >Más lejano primero</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+        </div>
+      </div>
+
+      <div class="timeline-wrapper">
+        <h2 class="timeline-title" *ngIf="!isLoading && filteredEvents.length > 0">
+          {{ selectedDateValue ? 'Eventos en el rango' : 'Próximos Eventos' }}
+        </h2>
+
+        <div
+          class="timeline-line"
+          *ngIf="!isLoading && filteredEvents.length > 0"
+        ></div>
+
+        <div *ngIf="isLoading" class="status-state">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+          <p>Cargando calendario...</p>
+        </div>
+        <div *ngIf="!isLoading && errorMessage" class="status-state error">
+          <ion-icon name="warning-outline" color="danger"></ion-icon>
+          <p>{{ errorMessage }}</p>
+        </div>
+        <div
+          *ngIf="!isLoading && !errorMessage && filteredEvents.length === 0"
+          class="status-state"
+        >
+          <ion-icon name="calendar-outline"></ion-icon>
+          <p>
+            {{
+              selectedDateValue
+                ? 'No hay eventos en este rango.'
+                : 'No hay eventos que coincidan.'
+            }}
+          </p>
+        </div>
+
+        <div *ngFor="let event of filteredEvents" class="timeline-item">
+          <div
+            class="event-dot"
+            [class.event-critical-dot]="event.severity === 'CRÍTICO'"
+            [class.event-important-dot]="event.severity === 'IMPORTANTE'"
+          >
+            <ion-icon [name]="event.icon" class="event-icon"></ion-icon>
+          </div>
+
+          <ion-card
+            class="event-card"
+            [ngClass]="{
+              'event-critical': event.severity === 'CRÍTICO',
+              'event-important': event.severity === 'IMPORTANTE'
+            }"
+          >
+            <div class="event-severity">{{ event.severity }}</div>
+            <ion-card-header>
+              <div class="header-line">
+                <ion-chip outline="true" color="primary" class="event-category">
+                  {{ event.category }}
+                </ion-chip>
+                <span class="event-date">📅 {{ event.displayDate }}</span>
+              </div>
+              <ion-card-title>{{ event.title }}</ion-card-title>
+              </ion-card-header>
+            <ion-card-content> {{ event.description }} </ion-card-content>
+          </ion-card>
+        </div>
+        </div>
+    </ion-content>

@@ -87,22 +87,17 @@
   font-size: 1.25rem;
 }
 
-/* ============================================== */
-/* =====       MEJORA DE DISEÑO AÑADIDA       ===== */
-/* ============================================== */
 .member-badge {
   font-size: 0.8rem;
   font-weight: 600;
   padding: 6px 10px;
   border-radius: 10px;
-  margin-left: auto; /* Empuja el badge a la derecha */
-
-  ion-icon {
-    margin-right: 6px;
-    font-size: 1rem;
-  }
+  margin-left: auto;
 }
-/* ============================================== */
+.member-badge ion-icon {
+  margin-right: 6px;
+  font-size: 1rem;
+}
 
 .result-card p {
   font-size: 1rem;
@@ -124,6 +119,38 @@
   object-fit: cover;
   border-radius: 12px;
   margin-top: 12px;
+}
+
+.table-detail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 16px;
+}
+
+.table-detail ion-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.table-detail p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.table-detail p strong {
+  display: block;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.table-detail p span {
+  color: #333;
 }
 
 .nested-card {

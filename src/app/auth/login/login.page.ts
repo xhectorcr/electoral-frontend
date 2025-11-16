@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
+  AlertController,
   IonButton,
   IonContent,
   IonIcon,
@@ -49,17 +50,30 @@ export class LoginPage {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private alertCtrl: AlertController
   ) {}
 
-  login() {
+  async presentAlert(header: string, message: string) {
+    const alert = await this.alertCtrl.create({
+      header: header,
+      message: message,
+      buttons: ['OK'],
+      cssClass: 'custom-alert-class',
+    });
+    await alert.present();
+  }
+
+  async login() {
     if (!this.dni.trim() || this.dni.length !== 8) {
-      alert('Por favor, ingresa un DNI válido de 8 dígitos.');
+      await this.presentAlert(
+        'DNI Inválido',
+        'Por favor, ingresa un DNI válido de 8 dígitos.'
+      );
       return;
     }
 
     this.loading = true;
-
     const passToSend = this.dni.trim();
 
     const request: LoginRequest = {
@@ -75,19 +89,25 @@ export class LoginPage {
         })
       )
       .subscribe({
-        next: (res) => {
+        next: async (res) => {
           if (res.success) {
             this.authService.setToken(res.data.accessToken);
             this.router.navigateByUrl('/member/dashboard', {
               replaceUrl: true,
             });
           } else {
-            alert(res.message || 'Error en el login.');
+            await this.presentAlert(
+              'Error',
+              res.message || 'Error en el login.'
+            );
           }
         },
-        error: (err) => {
+        error: async (err) => {
           console.error(err);
-          alert(err.error?.message || 'Ocurrió un error al iniciar sesión.');
+          await this.presentAlert(
+            'Error al Ingresar',
+            err.error?.message || 'Ocurrió un error al iniciar sesión.'
+          );
         },
       });
   }

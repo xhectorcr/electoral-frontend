@@ -31,7 +31,11 @@ import {
 import { addIcons } from 'ionicons';
 import {
   calendarOutline,
+  checkmarkDoneCircleOutline,
   chevronDownOutline,
+  clipboardOutline,
+  earthOutline,
+  idCardOutline,
   refreshOutline,
   warningOutline,
 } from 'ionicons/icons';
@@ -51,6 +55,7 @@ interface ElectoralEvent {
   sortDate: Date;
   title: string;
   description: string;
+  icon: string;
 }
 
 interface HighlightedDate {
@@ -64,6 +69,10 @@ addIcons({
   chevronDownOutline,
   warningOutline,
   refreshOutline,
+  idCardOutline,
+  earthOutline,
+  clipboardOutline,
+  checkmarkDoneCircleOutline,
 });
 
 @Component({
@@ -107,14 +116,15 @@ export class CalendarPage implements OnInit {
   categories: string[] = [];
   highlightedDates: HighlightedDate[] = [];
 
-  // Estado de UI
   selectedCategory: string = 'all';
   sortOrder: string = 'recent';
   isLoading: boolean = false;
   errorMessage: string | null = null;
+
   selectedDateValue: string | string[] | null = null;
-  selectedStartDate: string | null = null;
-  selectedEndDate: string | null = null;
+
+  private selectedStartDate: string | null = null;
+  private selectedEndDate: string | null = null;
 
   constructor(
     private calendarService: CalendarService,
@@ -175,20 +185,27 @@ export class CalendarPage implements OnInit {
     event: CalendarEventResponse
   ): ElectoralEvent {
     let severity: 'CRÍTICO' | 'IMPORTANTE' = 'IMPORTANTE';
-    if (event.title.includes('ELECCIONES') || event.title.includes('VUELTA')) {
-      severity = 'CRÍTICO';
-    }
-
     let category: string;
+    let icon: string;
+
     switch (event.type) {
       case CalendarEventType.POLL_WORKER:
         category = 'Miembros de mesa';
+        icon = 'id-card-outline';
         break;
       case CalendarEventType.GENERAL:
         category = 'General';
+        icon = 'earth-outline';
         break;
       default:
         category = 'Preparación';
+        icon = 'clipboard-outline';
+    }
+
+    if (event.title.includes('ELECCIONES') || event.title.includes('VUELTA')) {
+      severity = 'CRÍTICO';
+      category = 'Votación';
+      icon = 'checkmark-done-circle-outline';
     }
 
     const sortDate = new Date(event.eventDate);
@@ -206,22 +223,25 @@ export class CalendarPage implements OnInit {
       sortDate: sortDate,
       title: event.title,
       description: event.description,
+      icon: icon,
     };
   }
 
   onDateSelected(event: any) {
     const value = event.detail.value;
+    this.selectedDateValue = value;
 
     if (Array.isArray(value)) {
       this.selectedStartDate = this.formatDate(value[0]);
       this.selectedEndDate = this.formatDate(value[value.length - 1]);
-
-      this.selectedDateValue = [this.selectedStartDate, this.selectedEndDate];
-    } else {
+    } else if (value) {
       this.selectedStartDate = this.formatDate(value);
       this.selectedEndDate = this.selectedStartDate;
-      this.selectedDateValue = this.selectedStartDate;
+    } else {
+      this.selectedStartDate = null;
+      this.selectedEndDate = null;
     }
+
     this.filterAndSortEvents();
   }
 
@@ -243,6 +263,7 @@ export class CalendarPage implements OnInit {
       );
     }
 
+    // 3. Ordenar
     events.sort((a, b) => {
       if (this.sortOrder === 'recent') {
         return a.sortDate.getTime() - b.sortDate.getTime();
@@ -268,11 +289,8 @@ export class CalendarPage implements OnInit {
     this.filterAndSortEvents();
   }
 
-  private formatDate(date: any): string {
-    const formatted = this.datePipe.transform(date, 'yyyy-MM-dd');
-    if (!formatted) {
-      return '';
-    }
-    return formatted;
+  private formatDate(date: any): string | null {
+    if (!date) return null;
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
 }

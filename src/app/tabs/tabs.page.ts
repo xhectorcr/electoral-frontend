@@ -10,6 +10,7 @@ import {
   peopleOutline,
   ribbonOutline,
 } from 'ionicons/icons';
+import { ChatbotPage } from '../shared/components/chatbot/chatbot.page';
 
 addIcons({
   'calendar-outline': calendarOutline,
@@ -25,6 +26,6 @@ addIcons({
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
   standalone: true,
-  imports: [IonicModule, RouterModule],
+  imports: [IonicModule, RouterModule, ChatbotPage],
 })
 export class TabsPage {}
