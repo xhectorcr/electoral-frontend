@@ -1,13 +1,207 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>vote-info</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Información de Votación</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">vote-info</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="page-bg">
+  <div class="header-section">
+    <h1>Encuentra tu Centro de Votación</h1>
+    <p>Ingresa tu DNI para obtener tu local de votación y más detalles.</p>
+
+    <div class="maps-info">
+      <ion-icon name="location-outline" class="maps-icon"></ion-icon>
+      <span>Conecta con Google Maps para ver la ruta</span>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <ion-item class="search-item" lines="none">
+      <ion-input
+        type="tel"
+        pattern="[0-9]*"
+        maxlength="8"
+        placeholder="Ingresa tu DNI (8 dígitos)"
+        [(ngModel)]="dni"
+        (keyup.enter)="onSearch()"
+      ></ion-input>
+      <ion-icon name="search-outline" slot="end" color="medium"></ion-icon>
+    </ion-item>
+
+    <ion-button
+      expand="block"
+      class="search-button"
+      color="primary"
+      (click)="onSearch()"
+    >
+      Buscar
+    </ion-button>
+  </div>
+
+  <div *ngIf="showResults" class="results-container">
+    <ion-card class="result-card">
+      <ion-card-header class="card-header-icon">
+        <ion-icon name="location" color="primary"></ion-icon>
+        <ion-card-title>Tu Lugar de Votación</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Institución:</strong> I.E. San Luis Gonzaga</p>
+        <p><strong>Dirección:</strong> Av. San Martín 123, Ica</p>
+        <p><strong>Mesa de sufragio:</strong> N°16</p>
+        <ion-button
+          expand="full"
+          fill="outline"
+          color="primary"
+          class="map-button"
+        >
+          <ion-icon name="map-outline" slot="start"></ion-icon>
+          Ver en el mapa
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="result-card">
+      <ion-card-header class="card-header-icon">
+        <ion-icon name="document-text" color="secondary"></ion-icon>
+        <ion-card-title>Cédula de Sufragio</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="nested-card">
+          <h4>La cédula contendrá:</h4>
+          <ul class="checkmark-list">
+            <li>Candidatos presidenciales (planchas)</li>
+            <li>Candidatos a diputados</li>
+            <li>Candidatos a senadores</li>
+          </ul>
+        </div>
+
+        <p class="instruction-text">
+          Marca claramente tu voto con bolígrafo azul. Una opción por cada
+          cargo.
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="separator-container">
+      <hr class="separator-line" />
+      <h2 class="section-title">Cómo Votar - Paso a Paso</h2>
+    </div>
+    <div class="steps-grid">
+      <ion-card class="step-card">
+        <ion-card-header>
+          <div class="step-number">1</div>
+          <ion-card-title>Presenta tu DNI</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Llega con tu DNI. Debes estar en el padrón electoral de la mesa
+          asignada.
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="step-card">
+        <ion-card-header>
+          <div class="step-number">2</div>
+          <ion-card-title>Forma fila</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Respeta el orden. Los miembros de mesa verificarán tu identidad.
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="step-card">
+        <ion-card-header>
+          <div class="step-number">3</div>
+          <ion-card-title>Marca tu voto</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Recibirás una cédula. Marca claramente tu voto con un bolígrafo azul.
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="step-card">
+        <ion-card-header>
+          <div class="step-number">4</div>
+          <ion-card-title>Deposita el voto</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Dobla tu cédula como se indica y deposítala en la urna transparente.
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="step-card">
+        <ion-card-header>
+          <div class="step-number">5</div>
+          <ion-card-title>Recibe tu DNI</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Recibirás tu DNI con el sticker de votación y se te marcará el dedo.
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="separator-container">
+      <hr class="separator-line" />
+      <h2 class="section-title">Recomendaciones de Seguridad</h2>
+    </div>
+
+    <ion-card class="recommendation-card">
+      <ion-card-header class="card-header-icon">
+        <ion-icon name="walk-outline" color="tertiary"></ion-icon>
+        <ion-card-title>Seguridad en Desplazamiento</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ul class="recommendation-list">
+          <li>Lleva solo documentos necesarios.</li>
+          <li>No lleves objetos de valor.</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="recommendation-card">
+      <ion-card-header class="card-header-icon">
+        <ion-icon name="shield-checkmark-outline" color="tertiary"></ion-icon>
+        <ion-card-title>En el Centro de Votación</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ul class="recommendation-list">
+          <li>Mantente en el perímetro permitido.</li>
+          <li>No ingreses con objetos prohibidos.</li>
+          <li>Respeta las indicaciones de los miembros de mesa.</li>
+          <li>No divulgues tu voto.</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="recommendation-card">
+      <ion-card-header class="card-header-icon">
+        <ion-icon name="list-circle-outline" color="tertiary"></ion-icon>
+        <ion-card-title>Derechos Electorales</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ul class="recommendation-list">
+          <li>Tienes derecho al voto secreto.</li>
+          <li>Puedes solicitar ayuda si tienes discapacidad.</li>
+          <li>Puedes denunciar irregularidades ante la ONPE.</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="member-card-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¿Eres miembro de mesa?</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>
+          Inicia sesión para ver tu mesa asignada, tu rol, documentos y más.
+        </p>
+
+        <ion-button expand="block" color="secondary" routerLink="/login">
+          Iniciar sesión
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

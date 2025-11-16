@@ -1,0 +1,93 @@
+<ion-header [translucent]="true">
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Padrón de Votantes</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content [fullscreen]="true" class="page-background">
+      <ion-searchbar
+        [(ngModel)]="searchTerm"
+        placeholder="Buscar por DNI o nombre"
+        [debounce]="300"
+        (ionInput)="filterVoters()"
+        animated="true"
+        class="custom-searchbar"
+      ></ion-searchbar>
+
+      <ion-segment
+        [(ngModel)]="selectedSegment"
+        (ionChange)="filterVoters()"
+        color="primary"
+        class="sticky-segment"
+      >
+        <ion-segment-button value="all">
+          <ion-label>Todos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="pending">
+          <ion-label>Pendientes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="voted">
+          <ion-label>Votaron</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <ion-list class="voter-list">
+        <ion-list-header>
+          Mostrando {{ filteredVoters.length }} de {{ allVoters.length }} votantes
+        </ion-list-header>
+
+        <ion-item *ngIf="filteredVoters.length === 0" lines="none" class="no-results-item">
+          <ion-icon name="person-circle-outline" slot="start" color="medium"></ion-icon>
+          <ion-label>No se encontraron votantes que coincidan.</ion-label>
+        </ion-item>
+
+        <ion-item-sliding
+          *ngFor="let voter of filteredVoters; trackBy: trackVoter"
+          #slidingItem
+        >
+          <ion-item-options side="start">
+            <ion-item-option
+              color="success"
+              (click)="markAsVoted(voter, slidingItem)"
+              *ngIf="voter.status === 'pending'"
+            >
+              <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>
+              Votó
+            </ion-item-option>
+          </ion-item-options>
+
+          <ion-item class="voter-item">
+            <ion-icon
+              name="person-circle-outline"
+              slot="start"
+              class="voter-icon"
+              [color]="voter.status === 'voted' ? 'success' : 'medium'"
+            ></ion-icon>
+            <ion-label>
+              <h2>{{ voter.name }}</h2>
+              <p>DNI: {{ voter.dni }}</p>
+            </ion-label>
+            <ion-chip
+              [color]="voter.status === 'voted' ? 'success' : 'light'"
+              slot="end"
+              outline="true"
+            >
+              <ion-label>{{ voter.status === 'voted' ? 'Votó' : 'Pendiente' }}</ion-label>
+            </ion-chip>
+          </ion-item>
+
+          <ion-item-options side="end">
+            <ion-item-option
+              color="danger"
+              (click)="reportIncident(voter, slidingItem)"
+            >
+              <ion-icon slot="icon-only" name="alert-circle"></ion-icon>
+              Reportar
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-content>

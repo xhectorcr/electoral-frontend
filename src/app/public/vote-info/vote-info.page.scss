@@ -1,0 +1,257 @@
+/* Estilos Originales */
+.page-bg {
+  --background: #f1f5f9;
+}
+
+.header-section {
+  text-align: center;
+  padding: 30px 20px 20px;
+  background: linear-gradient(180deg, #1e3a8a, #3b82f6);
+  color: white;
+  border-radius: 0 0 30px 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.header-section h1 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.header-section p {
+  font-size: 0.94rem;
+  opacity: 0.85;
+}
+
+.maps-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+  gap: 8px;
+  font-size: 0.94rem;
+  opacity: 0.9;
+}
+
+.maps-icon {
+  font-size: 1.37rem;
+}
+
+.search-container {
+  margin: 20px;
+  margin-top: 30px;
+}
+
+.search-item {
+  --background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --padding-start: 14px;
+  margin-bottom: 16px;
+}
+
+.search-item ion-input {
+  font-size: 1rem;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+}
+
+.search-button {
+  --border-radius: 14px;
+  font-size: 1.06rem;
+  height: 48px;
+  --box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+}
+
+.results-container {
+  padding: 0 16px 20px 16px;
+}
+
+.result-card {
+  margin: 0 4px 20px 4px;
+  border-radius: 20px;
+  --background: white;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.card-header-icon {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-header-icon ion-icon {
+  font-size: 1.8rem;
+}
+
+.card-header-icon ion-card-title {
+  font-size: 1.25rem;
+}
+
+.result-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+.result-card p strong {
+  color: #000000;
+}
+
+.map-button {
+  margin-top: 16px;
+}
+
+.nested-card {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.nested-card h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-weight: 600;
+}
+
+.checkmark-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.checkmark-list li {
+  color: #555;
+  margin-bottom: 6px;
+  position: relative;
+  padding-left: 28px;
+}
+
+.checkmark-list li::before {
+  content: "✓";
+  color: var(--ion-color-primary, #3b82f6);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.instruction-text {
+  font-size: 0.95rem;
+  color: #555;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* Estilo para el Separador */
+.separator-container {
+  margin: 24px 0;
+  text-align: center;
+}
+
+.separator-line {
+  border: 0;
+  border-top: 1px solid #d1d5db;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+/* Estilo para Pasos */
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.step-card {
+  margin: 0;
+  border-radius: 16px;
+  --background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+.step-card ion-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-number {
+  background: var(--ion-color-primary, #3b82f6);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-card ion-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Estilo para Recomendaciones */
+.recommendation-card {
+  margin: 0 4px 20px 4px;
+  border-radius: 16px;
+  --background: #fff;
+}
+
+.recommendation-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.recommendation-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.recommendation-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--ion-color-tertiary, #60a5fa);
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.member-card-container {
+  margin: 20px;
+  ion-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  p {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  ion-button {
+    margin-top: 10px;
+    font-weight: 600;
+  }
+}

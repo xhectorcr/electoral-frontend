@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" class="page-background">
+  <div class="top-section">
+    <h2>{{ miembroNombre }}</h2>
+    <h3>{{ mesaNumero }}</h3>
+    <div
+      class="estado-badge"
+      [class.abierta]="estadoMesa === 'Aperturada'"
+      [class.cerrada]="estadoMesa === 'Cerrada'"
+    >
+      {{ estadoMesa }}
+    </div>
+  </div>
+
+  <ion-card class="summary-card">
+    <ion-card-content>
+      <div class="row">
+        <div class="col">
+          <h4>{{ totalVotantes }}</h4>
+          <p>Total votantes</p>
+        </div>
+        <div class="col">
+          <h4>{{ votaron }}</h4>
+          <p>Han votado</p>
+        </div>
+        <div class="col">
+          <h4>{{ votantesPendientes }}</h4>
+          <p>Pendientes</p>
+        </div>
+      </div>
+      <div class="progress-container">
+        <div
+          class="progress-bar"
+          [style.width.%]="porcentajeParticipacion"
+        ></div>
+      </div>
+      <p class="progress-text">
+        Participación: <strong>{{ porcentajeParticipacion }}%</strong>
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="info-card">
+    <ion-card-content>
+      <div class="quick-actions">
+        <div class="action" (click)="registrarAsistencia()">
+          <ion-icon name="checkbox-outline" color="primary"></ion-icon>
+          <span>Asistencia</span>
+        </div>
+
+        <div class="action" (click)="verPendientes()">
+          <ion-icon name="list-outline" color="primary"></ion-icon>
+          <span>Pendientes</span>
+          <small>{{ votantesPendientes }}</small>
+        </div>
+
+        <div class="action" (click)="verIncidencias()">
+          <ion-icon name="warning-outline" color="primary"></ion-icon>
+          <span>Incidencias</span>
+          <small>{{ incidenciasReportadas }}</small>
+        </div>
+
+        <div class="action" (click)="manualVotacion()">
+          <ion-icon name="person-outline" color="primary"></ion-icon>
+          <span>Registrar voto</span>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="ultimasIncidencias.length > 0" class="incidencias-card">
+    <ion-card-content>
+      <h3 class="section-title">Últimas incidencias</h3>
+      <div class="incidencia" *ngFor="let i of ultimasIncidencias">
+        <ion-icon name="warning-outline" color="danger"></ion-icon>
+        <div class="text">
+          <strong>{{ i.titulo }}</strong>
+          <p>{{ i.fecha }}</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="danger-zone">
+    <ion-card-content>
+      <h3 class="section-title">Acciones de Mesa</h3>
+
+      <ion-button expand="block" color="warning" (click)="reportarIncidencia()">
+        Reportar incidencia
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        color="danger"
+        (click)="cerrarMesa()"
+        *ngIf="estadoMesa === 'Aperturada'"
+      >
+        Cerrar mesa
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        color="success"
+        (click)="reabrirMesa()"
+        *ngIf="estadoMesa === 'Cerrada'"
+      >
+        Reabrir mesa
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

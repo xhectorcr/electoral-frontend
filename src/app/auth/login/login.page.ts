@@ -28,7 +28,7 @@ export class LoginPage {
   password = '';
 
   private staticUser = {
-    email: 'user@onpe.pe',
+    email: 'user',
     password: '123456',
   };
 
@@ -45,7 +45,8 @@ export class LoginPage {
       this.password.trim() === this.staticUser.password
     ) {
       console.log('Login OK', this.email, this.password);
-      this.router.navigate(['/tabs']);
+
+      this.router.navigateByUrl('/member/dashboard', { replaceUrl: true });
     } else {
       alert('Correo o contraseña incorrectos.');
     }

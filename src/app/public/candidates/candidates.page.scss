@@ -1,0 +1,114 @@
+ion-content {
+  --background: #f4f5f7;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  margin: 20px 0 10px;
+  font-family: "Inter", sans-serif;
+}
+
+.search-item {
+  --background: #ffffff;
+  --border-radius: 12px;
+  margin: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tags-segment {
+  margin: 0 16px 16px 16px;
+  --background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.results-summary {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 18px 16px;
+  font-family: "Inter", sans-serif;
+}
+
+.candidates-grid {
+  display: grid;
+  gap: 16px;
+  padding: 0 16px 16px;
+  grid-template-columns: 1fr; 
+}
+
+@media (min-width: 600px) {
+  .candidates-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .candidates-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.candidate-card {
+  --background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.candidate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
+}
+
+.candidate-photo {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.candidate-card ion-card-header {
+  position: relative;
+  padding-top: 32px; 
+  text-align: center;
+}
+
+.party-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.candidate-card ion-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.candidate-card ion-card-subtitle {
+  font-size: 1rem;
+  color: #555;
+}
+
+.candidate-card ion-card-content {
+  padding: 16px;
+  padding-top: 8px;
+  margin-top: auto; 
+}
+
+.candidate-card ion-button {
+  --border-radius: 10px;
+}
