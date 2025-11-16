@@ -1,12 +1,10 @@
 .chat-content {
   --background: #f4f7f8;
 }
-
 .message-list {
   background: transparent;
   padding: 16px;
 }
-
 .message-item {
   --background: transparent;
   --padding-start: 0;
@@ -14,7 +12,6 @@
   margin-bottom: 8px;
   display: flex;
 }
-
 .message-bubble {
   display: flex;
   gap: 10px;
@@ -22,49 +19,47 @@
   border-radius: 18px;
   max-width: 80%;
 }
-
 .message-bubble ion-label {
-  white-space: normal; 
+  white-space: normal;
   font-size: 0.95rem;
   line-height: 1.5;
 }
-
 .bot-bubble {
   background: #ffffff;
   color: #333;
   border-radius: 18px 18px 18px 0;
-  align-self: flex-start; 
+  align-self: flex-start;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
-
 .bot-avatar {
   width: 32px;
   height: 32px;
   flex-shrink: 0;
 }
-
 .user-bubble {
-  background: var(--ion-color-primary, #3880ff);
-  color: var(--ion-color-primary-contrast, #ffffff);
+  background: #fff;
+  color: #fff !important;
   border-radius: 18px 18px 0 18px;
-  margin-left: auto; 
+  margin-left: auto;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
 .chat-footer {
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
 }
-
 .chat-footer .input-item {
   --background: #ffffff;
   --padding-start: 8px;
 }
-
 .chat-footer ion-input {
   --background: #f4f7f8;
   --padding-start: 12px;
   --padding-end: 12px;
   border-radius: 18px;
+
+  --color: #333;
+
+  --placeholder-color: #888;
+  --placeholder-opacity: 1;
 }
 
 .chat-footer ion-button {

@@ -38,6 +38,7 @@ import { finalize } from 'rxjs';
 import { ElectorResponse } from 'src/app/core/model/elector_tools/elector_tools.model';
 import { ElectorService } from 'src/app/core/services/elector_tools/elector_tools.service';
 import { ReniecService } from 'src/app/core/services/reniec/reniec.service';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 
 addIcons({
   searchOutline,
@@ -95,6 +96,7 @@ interface VoterDataView {
     IonCardContent,
     IonLabel,
     IonBadge,
+    HeaderComponent
   ],
   providers: [DatePipe],
 })
